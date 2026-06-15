@@ -7,6 +7,38 @@ datasource db {
   provider = "postgresql"
 }
 
+enum UserRole {
+  PATIENT
+  DENTIST
+  ADMIN
+}
+
+enum AppointmentStatus {
+  REQUESTED
+  CONFIRMED
+  REFUSED
+  CANCELLED
+  COMPLETED
+}
+
+enum NotificationType {
+  APPOINTMENT_REQUESTED
+  APPOINTMENT_CONFIRMED
+  APPOINTMENT_REFUSED
+  APPOINTMENT_CANCELLED
+  APPOINTMENT_COMPLETED
+  REMINDER_SENT
+  CONTACT_MESSAGE
+  SYSTEM
+}
+
+enum ReminderStatus {
+  PENDING
+  SENT
+  FAILED
+  SIMULATED
+}
+
 model HealthCheck {
   id        String   @id @default(cuid())
   status    String   @default("ok")
@@ -14,4 +46,171 @@ model HealthCheck {
   checkedAt DateTime @default(now())
 
   @@map("health_checks")
+}
+
+model User {
+  id             String          @id @default(cuid())
+  name           String
+  email          String          @unique
+  passwordHash   String
+  phone          String?
+  whatsapp       String?
+  role           UserRole
+  patientProfile PatientProfile?
+  dentistProfile DentistProfile?
+  notifications  Notification[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@map("users")
+}
+
+model PatientProfile {
+  id               String        @id @default(cuid())
+  userId           String        @unique
+  birthDate        DateTime?
+  document         String?       @unique
+  emergencyContact String?
+  notes            String?
+  user             User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  appointments     Appointment[]
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@map("patient_profiles")
+}
+
+model DentistProfile {
+  id             String                @id @default(cuid())
+  userId         String                @unique
+  cro            String                @unique
+  specialty      String
+  bio            String?
+  photoUrl       String?
+  phone          String?
+  active         Boolean               @default(true)
+  user           User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  appointments   Appointment[]
+  availabilities DentistAvailability[]
+  scheduleBlocks ScheduleBlock[]
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+
+  @@map("dentist_profiles")
+}
+
+model Service {
+  id              String        @id @default(cuid())
+  name            String        @unique
+  description     String
+  durationMinutes Int
+  active          Boolean       @default(true)
+  appointments    Appointment[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("services")
+}
+
+model DentistAvailability {
+  id                  String         @id @default(cuid())
+  dentistId           String
+  weekDay             Int
+  startTime           String
+  endTime             String
+  intervalStart       String?
+  intervalEnd         String?
+  appointmentDuration Int
+  active              Boolean        @default(true)
+  dentist             DentistProfile @relation(fields: [dentistId], references: [id], onDelete: Cascade)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  @@index([dentistId, weekDay])
+  @@map("dentist_availabilities")
+}
+
+model ScheduleBlock {
+  id        String         @id @default(cuid())
+  dentistId String
+  date      DateTime       @db.Date
+  startTime String
+  endTime   String
+  reason    String
+  dentist   DentistProfile @relation(fields: [dentistId], references: [id], onDelete: Cascade)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@index([dentistId, date])
+  @@map("schedule_blocks")
+}
+
+model Appointment {
+  id              String                @id @default(cuid())
+  patientId       String
+  dentistId       String
+  serviceId       String
+  date            DateTime              @db.Date
+  startTime       String
+  endTime         String
+  status          AppointmentStatus     @default(REQUESTED)
+  caseDescription String
+  refusalReason   String?
+  patient         PatientProfile        @relation(fields: [patientId], references: [id], onDelete: Restrict)
+  dentist         DentistProfile        @relation(fields: [dentistId], references: [id], onDelete: Restrict)
+  service         Service               @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  reminderLogs    WhatsAppReminderLog[]
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+
+  @@unique([dentistId, date, startTime])
+  @@index([patientId, status])
+  @@index([dentistId, date])
+  @@index([serviceId])
+  @@map("appointments")
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  read      Boolean          @default(false)
+  type      NotificationType
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime         @default(now())
+
+  @@index([userId, read])
+  @@index([type])
+  @@map("notifications")
+}
+
+model WhatsAppReminderLog {
+  id               String         @id @default(cuid())
+  appointmentId    String
+  patientPhone     String
+  message          String
+  status           ReminderStatus @default(PENDING)
+  sentAt           DateTime?
+  providerResponse Json?
+  appointment      Appointment    @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  createdAt        DateTime       @default(now())
+
+  @@index([appointmentId])
+  @@index([status])
+  @@map("whatsapp_reminder_logs")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([read, createdAt])
+  @@map("contact_messages")
 }

@@ -1,8 +1,8 @@
 # Nova Previne
 
-Base inicial do sistema web da Clinica Odontologica Nova Previne.
+Sistema web da Clinica Odontologica Nova Previne.
 
-O projeto sera desenvolvido em fases incrementais. No momento, foram concluidas apenas as Fases 1 e 2: setup inicial, Docker, PostgreSQL e Prisma com uma tabela minima de validacao.
+O projeto esta sendo desenvolvido em fases incrementais. No momento, foram concluidas as Fases 1, 2 e 3: setup inicial, Docker, PostgreSQL, Prisma e modelagem completa do banco com seed de desenvolvimento.
 
 ## Stack Atual
 
@@ -15,6 +15,7 @@ O projeto sera desenvolvido em fases incrementais. No momento, foram concluidas 
 - Prisma ORM
 - PostgreSQL
 - Docker e Docker Compose
+- Bcryptjs para hashes de senha no seed
 
 ## Scripts
 
@@ -85,6 +86,12 @@ Endpoint de validacao do banco:
 http://localhost:3000/api/health/db
 ```
 
+Para visualizar os dados pelo Prisma Studio:
+
+```bash
+npm run prisma:studio
+```
+
 ## Como Rodar com Docker
 
 Suba banco e aplicacao:
@@ -104,6 +111,40 @@ O servico `app` executa automaticamente:
 - `npm run prisma:deploy`
 - `npm run prisma:seed`
 - `npm run dev`
+
+## Dados Seedados
+
+Credenciais de desenvolvimento:
+
+```txt
+Admin:
+E-mail: admin@novaprevine.com
+Senha: admin123
+
+Paciente:
+E-mail: paciente@teste.com
+Senha: paciente123
+
+Dentistas:
+E-mail: joao.almeida@novaprevine.com
+Senha: dentista123
+
+E-mail: marina.costa@novaprevine.com
+Senha: dentista123
+
+E-mail: pedro.henrique@novaprevine.com
+Senha: dentista123
+```
+
+O seed tambem cria:
+
+- 6 servicos odontologicos.
+- 3 perfis profissionais de dentistas.
+- Disponibilidades basicas para os dentistas.
+- Consultas de exemplo.
+- Notificacoes internas de exemplo.
+- Log simulado de lembrete por WhatsApp.
+- Mensagem de contato de exemplo.
 
 ## Variaveis de Ambiente
 
@@ -186,3 +227,38 @@ Nao implementado nesta fase:
 - Fluxo de agendamento.
 
 Esses itens pertencem as fases seguintes e nao devem ser antecipados.
+
+## Status da Fase 3
+
+Concluido:
+
+- Models principais criados no Prisma:
+  - `User`
+  - `PatientProfile`
+  - `DentistProfile`
+  - `Service`
+  - `DentistAvailability`
+  - `ScheduleBlock`
+  - `Appointment`
+  - `Notification`
+  - `WhatsAppReminderLog`
+  - `ContactMessage`
+- Enums criados:
+  - `UserRole`
+  - `AppointmentStatus`
+  - `NotificationType`
+  - `ReminderStatus`
+- Relacoes, indices e unicidades configurados.
+- Migration `phase_3_core_domain_models` criada e aplicada.
+- Seed completo criado com admin, paciente, dentistas, servicos, disponibilidades e dados de exemplo.
+- Hashes de senha gerados com bcryptjs.
+
+Nao implementado nesta fase:
+
+- Autenticacao.
+- Telas publicas completas.
+- Dashboards.
+- Fluxo real de agendamento.
+- Acoes de aceitar, recusar, cancelar ou concluir consultas.
+
+Esses itens pertencem as proximas fases.
