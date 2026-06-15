@@ -1,0 +1,10 @@
+.env
+.env.local
+.next
+build
+coverage
+node_modules
+npm-debug.log*
+next-dev*.log
+*.log
+README.md

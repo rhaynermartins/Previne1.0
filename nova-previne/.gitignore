@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+/.docker-cli
 
 # debug
 *.log
@@ -41,3 +42,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
