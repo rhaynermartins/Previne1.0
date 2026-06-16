@@ -5,10 +5,10 @@ import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 
 const navItems = [
-  { href: "/#sobre", label: "Sobre" },
-  { href: "/#tratamentos", label: "Tratamentos" },
-  { href: "/#dentistas", label: "Dentistas" },
-  { href: "/#contato", label: "Contato" },
+  { href: "/sobre", label: "Sobre" },
+  { href: "/tratamentos", label: "Tratamentos" },
+  { href: "/dentistas", label: "Dentistas" },
+  { href: "/contato", label: "Contato" },
 ];
 
 export function Header() {
@@ -50,7 +50,7 @@ export function Header() {
             Entrar
           </ButtonLink>
           <ButtonLink
-            href="/#contato"
+            href="/contato"
             icon={<CalendarCheck aria-hidden="true" className="size-4" />}
             size="sm"
           >
@@ -86,7 +86,7 @@ export function Header() {
               </ButtonLink>
               <ButtonLink
                 className="w-full"
-                href="/#contato"
+                href="/contato"
                 icon={<CalendarCheck aria-hidden="true" className="size-4" />}
                 size="sm"
               >

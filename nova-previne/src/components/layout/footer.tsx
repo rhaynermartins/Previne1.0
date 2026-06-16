@@ -4,10 +4,10 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 
 const footerLinks = [
-  { href: "/#sobre", label: "Sobre" },
-  { href: "/#tratamentos", label: "Tratamentos" },
-  { href: "/#dentistas", label: "Dentistas" },
-  { href: "/#contato", label: "Contato" },
+  { href: "/sobre", label: "Sobre" },
+  { href: "/tratamentos", label: "Tratamentos" },
+  { href: "/dentistas", label: "Dentistas" },
+  { href: "/contato", label: "Contato" },
 ];
 
 const contactItems = [
