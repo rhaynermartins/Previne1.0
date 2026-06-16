@@ -8,6 +8,7 @@ const navItems = [
   { href: "/sobre", label: "Sobre" },
   { href: "/tratamentos", label: "Tratamentos" },
   { href: "/dentistas", label: "Dentistas" },
+  { href: "/cadastro", label: "Cadastro" },
   { href: "/contato", label: "Contato" },
 ];
 

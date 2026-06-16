@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/ui/section-title";
@@ -57,6 +58,14 @@ export default function DentistRegisterPage() {
               Informe seus dados clínicos e de contato para que a plataforma prepare
               seu perfil de dentista com segurança, organização e padrão profissional.
             </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="/login" size="lg" variant="secondary">
+                Já tenho conta
+              </ButtonLink>
+              <ButtonLink href="/cadastro" size="lg" variant="neutral">
+                Ver opções de cadastro
+              </ButtonLink>
+            </div>
 
             <div className="mt-8 grid gap-4">
               {benefits.map((benefit) => (

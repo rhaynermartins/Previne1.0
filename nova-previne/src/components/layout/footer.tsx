@@ -10,6 +10,13 @@ const footerLinks = [
   { href: "/contato", label: "Contato" },
 ];
 
+const accessLinks = [
+  { href: "/login", label: "Entrar" },
+  { href: "/cadastro", label: "Criar conta" },
+  { href: "/cadastro/paciente", label: "Cadastro de paciente" },
+  { href: "/cadastro/dentista", label: "Cadastro de dentista" },
+];
+
 const contactItems = [
   {
     icon: <Phone aria-hidden="true" className="size-4" />,
@@ -32,7 +39,7 @@ const contactItems = [
 export function Footer() {
   return (
     <footer className="border-t border-[#d9ebf2] bg-white">
-      <Container className="grid gap-10 py-10 lg:grid-cols-[1.2fr_0.8fr_1fr] lg:py-12">
+      <Container className="grid gap-10 py-10 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.9fr_1fr] lg:py-12">
         <div>
           <Link className="inline-flex items-center gap-3 text-dark-blue" href="/">
             <span className="flex size-11 items-center justify-center rounded-lg bg-light-blue text-primary-blue">
@@ -54,6 +61,19 @@ export function Footer() {
         <nav aria-label="Links do rodapé" className="grid content-start gap-3">
           <p className="text-sm font-bold text-dark-blue">Institucional</p>
           {footerLinks.map((item) => (
+            <Link
+              className="text-sm font-semibold text-gray-text transition hover:text-primary-blue"
+              href={item.href}
+              key={item.href}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <nav aria-label="Links de acesso" className="grid content-start gap-3">
+          <p className="text-sm font-bold text-dark-blue">Acesso</p>
+          {accessLinks.map((item) => (
             <Link
               className="text-sm font-semibold text-gray-text transition hover:text-primary-blue"
               href={item.href}

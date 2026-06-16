@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { HeartPulse, LockKeyhole, ShieldCheck, Sparkles } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/ui/section-title";
@@ -48,6 +49,14 @@ export default function PatientRegisterPage() {
               Informe seus dados básicos para que a clínica tenha um cadastro inicial
               seguro e pronto para acompanhar seu relacionamento com a Nova Previne.
             </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="/login" size="lg" variant="secondary">
+                Já tenho conta
+              </ButtonLink>
+              <ButtonLink href="/cadastro" size="lg" variant="neutral">
+                Ver opções de cadastro
+              </ButtonLink>
+            </div>
 
             <div className="mt-8 grid gap-4">
               {benefits.map((benefit) => (

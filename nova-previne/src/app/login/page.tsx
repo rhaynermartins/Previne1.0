@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { KeyRound, LockKeyhole, ShieldCheck, UserRoundCheck } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { SectionTitle } from "@/components/ui/section-title";
@@ -52,6 +53,14 @@ export default async function LoginPage() {
               Use seu e-mail e senha para iniciar uma sessão na plataforma. O acesso
               identifica se você entra como paciente, dentista ou administrador.
             </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <ButtonLink href="/cadastro" size="lg" variant="secondary">
+                Criar conta
+              </ButtonLink>
+              <ButtonLink href="/contato" size="lg" variant="neutral">
+                Preciso de ajuda
+              </ButtonLink>
+            </div>
 
             <div className="mt-8 grid gap-4">
               {accessNotes.map((note) => (
