@@ -2,7 +2,7 @@
 
 Sistema web da Clinica Odontologica Nova Previne.
 
-O projeto esta sendo desenvolvido em fases incrementais. No momento, foram concluidas as Fases 1, 2 e 3: setup inicial, Docker, PostgreSQL, Prisma e modelagem completa do banco com seed de desenvolvimento.
+O projeto esta sendo desenvolvido em fases incrementais. No momento, foram concluidas as Fases 1, 2, 3 e 4: setup inicial, Docker, PostgreSQL, Prisma, modelagem completa do banco e layout base com identidade visual.
 
 ## Stack Atual
 
@@ -16,6 +16,7 @@ O projeto esta sendo desenvolvido em fases incrementais. No momento, foram concl
 - PostgreSQL
 - Docker e Docker Compose
 - Bcryptjs para hashes de senha no seed
+- Lucide React para icones da interface
 
 ## Scripts
 
@@ -172,12 +173,15 @@ nova-previne/
 │   └── seed.ts
 ├── public/
 │   └── images/
+│       └── nova-previne-clinic-hero.png
 ├── src/
 │   ├── app/
 │   │   └── api/
 │   │       └── health/
 │   │           └── db/
 │   ├── components/
+│   │   ├── layout/
+│   │   └── ui/
 │   ├── lib/
 │   │   └── prisma.ts
 │   ├── services/
@@ -260,5 +264,38 @@ Nao implementado nesta fase:
 - Dashboards.
 - Fluxo real de agendamento.
 - Acoes de aceitar, recusar, cancelar ou concluir consultas.
+
+Esses itens pertencem as proximas fases.
+
+## Status da Fase 4
+
+Concluido:
+
+- Design system inicial aplicado com paleta azul, verde, branco e cinzas suaves.
+- Componentes base criados:
+  - `Header`
+  - `Footer`
+  - `Button`
+  - `ButtonLink`
+  - `Card`
+  - `Badge`
+  - `StatusBadge`
+  - `SectionTitle`
+  - `Container`
+  - `Input`
+  - `Textarea`
+  - `Select`
+- Layout global com header e footer responsivos.
+- Pagina inicial ajustada como superficie visual da identidade Nova Previne.
+- Imagem hero odontologica adicionada em `public/images/nova-previne-clinic-hero.png`.
+- Revisao mobile feita no Browser integrado.
+
+Nao implementado nesta fase:
+
+- Paginas publicas completas.
+- Formulario de contato funcional.
+- Listagem de servicos ou dentistas vinda do banco.
+- Autenticacao.
+- Dashboards.
 
 Esses itens pertencem as proximas fases.
