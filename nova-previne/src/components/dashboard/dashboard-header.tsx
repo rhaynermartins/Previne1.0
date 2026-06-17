@@ -9,6 +9,7 @@ type DashboardHeaderProps = {
   roleLabel?: string;
   sessionLabel?: string;
   notificationsHref?: string;
+  showNotifications?: boolean;
   unreadNotificationsCount?: number;
   user: {
     email: string;
@@ -20,6 +21,7 @@ export function DashboardHeader({
   notificationsHref = "/dashboard/paciente/notificacoes",
   roleLabel = "Paciente",
   sessionLabel = "Sessão ativa em",
+  showNotifications = true,
   unreadNotificationsCount = 0,
   user,
 }: DashboardHeaderProps) {
@@ -47,25 +49,27 @@ export function DashboardHeader({
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row lg:items-center">
-          <Link
-            aria-label={
-              unreadNotificationsCount > 0
-                ? `${unreadNotificationsCount} notificacoes nao lidas`
-                : "Abrir notificacoes"
-            }
-            className="relative inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[#b9e4f4] bg-white px-5 text-sm font-semibold text-dark-blue transition hover:border-primary-blue hover:bg-light-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-blue"
-            href={notificationsHref}
-          >
-            <Bell aria-hidden="true" className="size-4" />
-            <span>Notificações</span>
-            {unreadNotificationsCount > 0 && (
-              <span className="inline-flex min-w-6 items-center justify-center rounded-full bg-primary-green px-2 py-0.5 text-xs font-bold text-white">
-                {unreadNotificationsCount > 99
-                  ? "99+"
-                  : unreadNotificationsCount}
-              </span>
-            )}
-          </Link>
+          {showNotifications && (
+            <Link
+              aria-label={
+                unreadNotificationsCount > 0
+                  ? `${unreadNotificationsCount} notificacoes nao lidas`
+                  : "Abrir notificacoes"
+              }
+              className="relative inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[#b9e4f4] bg-white px-5 text-sm font-semibold text-dark-blue transition hover:border-primary-blue hover:bg-light-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-blue"
+              href={notificationsHref}
+            >
+              <Bell aria-hidden="true" className="size-4" />
+              <span>Notificações</span>
+              {unreadNotificationsCount > 0 && (
+                <span className="inline-flex min-w-6 items-center justify-center rounded-full bg-primary-green px-2 py-0.5 text-xs font-bold text-white">
+                  {unreadNotificationsCount > 99
+                    ? "99+"
+                    : unreadNotificationsCount}
+                </span>
+              )}
+            </Link>
+          )}
 
           <form action={logout} className="w-full sm:w-auto">
             <Button

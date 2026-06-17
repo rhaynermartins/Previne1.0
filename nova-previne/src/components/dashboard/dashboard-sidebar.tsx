@@ -5,10 +5,13 @@ import {
   CalendarDays,
   CalendarRange,
   Clock,
+  ClipboardList,
   History,
   LayoutDashboard,
+  MessageSquare,
   PlusCircle,
   Stethoscope,
+  Users,
   UserRound,
   type LucideIcon,
 } from "lucide-react";
@@ -94,6 +97,39 @@ const dentistNavItems: DashboardNavItem[] = [
   },
 ];
 
+const adminNavItems: DashboardNavItem[] = [
+  {
+    href: "/dashboard/admin",
+    icon: LayoutDashboard,
+    label: "Início",
+  },
+  {
+    href: "/dashboard/admin/pacientes",
+    icon: Users,
+    label: "Pacientes",
+  },
+  {
+    href: "/dashboard/admin/dentistas",
+    icon: Stethoscope,
+    label: "Dentistas",
+  },
+  {
+    href: "/dashboard/admin/servicos",
+    icon: ClipboardList,
+    label: "Serviços",
+  },
+  {
+    href: "/dashboard/admin/consultas",
+    icon: CalendarDays,
+    label: "Consultas",
+  },
+  {
+    href: "/dashboard/admin/contatos",
+    icon: MessageSquare,
+    label: "Contatos",
+  },
+];
+
 type DashboardSidebarProps = {
   areaLabel?: string;
   homeHref?: string;
@@ -169,4 +205,4 @@ export function DashboardSidebar({
   );
 }
 
-export { dentistNavItems, patientNavItems };
+export { adminNavItems, dentistNavItems, patientNavItems };
