@@ -2,6 +2,7 @@ import {
   CalendarDays,
   Clock,
   FileText,
+  MessageCircle,
   Stethoscope,
   UserRound,
 } from "lucide-react";
@@ -19,6 +20,7 @@ type AppointmentCardProps = {
     dentistSpecialty: string;
     endTime: string;
     id?: string;
+    reminderSent?: boolean;
     refusalReason?: string | null;
     serviceName: string;
     startTime: string;
@@ -120,6 +122,25 @@ export function AppointmentCard({ appointment }: AppointmentCardProps) {
           </div>
         </div>
       </div>
+
+      {appointment.reminderSent && (
+        <div className="mt-4 rounded-lg border border-[#b7ead3] bg-light-green p-4">
+          <div className="flex items-start gap-3">
+            <MessageCircle
+              aria-hidden="true"
+              className="mt-0.5 size-5 shrink-0 text-primary-green"
+            />
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-[#006b3d]">
+                Lembrete por WhatsApp
+              </p>
+              <p className="mt-1 break-words text-sm leading-6 text-gray-text">
+                Um lembrete de WhatsApp foi registrado para esta consulta.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {appointment.refusalReason?.trim() && (
         <div className="mt-4 rounded-lg border border-[#fecaca] bg-[#fef2f2] p-4">

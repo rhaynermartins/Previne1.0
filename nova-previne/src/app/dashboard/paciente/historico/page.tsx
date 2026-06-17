@@ -53,6 +53,12 @@ async function getPatientAppointmentHistory(userId: string) {
             },
             endTime: true,
             id: true,
+            reminderLogs: {
+              select: {
+                id: true,
+              },
+              take: 1,
+            },
             service: {
               select: {
                 name: true,
@@ -131,6 +137,7 @@ export default async function PatientAppointmentHistoryPage() {
                 dentistName: appointment.dentist.user.name,
                 dentistSpecialty: appointment.dentist.specialty,
                 endTime: appointment.endTime,
+                reminderSent: appointment.reminderLogs.length > 0,
                 serviceName: appointment.service.name,
                 startTime: appointment.startTime,
                 status: appointment.status,

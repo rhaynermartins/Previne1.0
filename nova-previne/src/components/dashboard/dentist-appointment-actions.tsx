@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, ClipboardCheck, XCircle } from "lucide-react";
+import { CheckCircle2, ClipboardCheck, MessageCircle, XCircle } from "lucide-react";
 import { useActionState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -10,11 +10,13 @@ import {
   completeDentistAppointment,
   confirmDentistAppointment,
   refuseDentistAppointment,
+  sendDentistAppointmentReminder,
   type DentistAppointmentActionState,
 } from "@/app/dashboard/dentista/appointment-actions";
 
 type DentistAppointmentActionsProps = {
   appointmentId: string;
+  reminderSent?: boolean;
   status: AppointmentStatus;
 };
 
@@ -48,6 +50,7 @@ function HiddenAppointmentInput({ appointmentId }: { appointmentId: string }) {
 
 export function DentistAppointmentActions({
   appointmentId,
+  reminderSent = false,
   status,
 }: DentistAppointmentActionsProps) {
   const [confirmState, confirmAction, confirmPending] = useActionState(
@@ -60,6 +63,10 @@ export function DentistAppointmentActions({
   );
   const [completeState, completeAction, completePending] = useActionState(
     completeDentistAppointment,
+    initialState,
+  );
+  const [reminderState, reminderAction, reminderPending] = useActionState(
+    sendDentistAppointmentReminder,
     initialState,
   );
 
@@ -119,30 +126,55 @@ export function DentistAppointmentActions({
 
   if (status === AppointmentStatus.CONFIRMED) {
     return (
-      <div className="mt-5 grid gap-3 rounded-lg border border-[#b7ead3] bg-light-green/60 p-4">
+      <div className="mt-5 grid gap-4 rounded-lg border border-[#b7ead3] bg-light-green/60 p-4">
         <div>
           <p className="text-sm font-bold text-dark-blue">Atendimento confirmado</p>
           <p className="mt-1 text-sm leading-6 text-gray-text">
-            Marque como concluída quando o atendimento tiver sido realizado.
+            Envie um lembrete simulado por WhatsApp ou marque como concluída
+            quando o atendimento tiver sido realizado.
           </p>
         </div>
 
-        <div aria-live="polite">
+        <div className="grid gap-3" aria-live="polite">
+          {reminderSent && (
+            <div
+              className="rounded-lg border border-[#b9e4f4] bg-light-blue p-3 text-sm font-semibold text-dark-blue"
+              role="status"
+            >
+              Lembrete de WhatsApp ja registrado para esta consulta.
+            </div>
+          )}
+          <ActionMessage state={reminderState} />
           <ActionMessage state={completeState} />
         </div>
 
-        <form action={completeAction}>
-          <HiddenAppointmentInput appointmentId={appointmentId} />
-          <Button
-            className="w-full sm:w-auto"
-            icon={<ClipboardCheck aria-hidden="true" className="size-4" />}
-            isLoading={completePending}
-            type="submit"
-            variant="primary"
-          >
-            {completePending ? "Concluindo" : "Concluir consulta"}
-          </Button>
-        </form>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <form action={reminderAction}>
+            <HiddenAppointmentInput appointmentId={appointmentId} />
+            <Button
+              className="w-full sm:w-auto"
+              icon={<MessageCircle aria-hidden="true" className="size-4" />}
+              isLoading={reminderPending}
+              type="submit"
+              variant="success"
+            >
+              {reminderPending ? "Enviando lembrete" : "Enviar lembrete"}
+            </Button>
+          </form>
+
+          <form action={completeAction}>
+            <HiddenAppointmentInput appointmentId={appointmentId} />
+            <Button
+              className="w-full sm:w-auto"
+              icon={<ClipboardCheck aria-hidden="true" className="size-4" />}
+              isLoading={completePending}
+              type="submit"
+              variant="primary"
+            >
+              {completePending ? "Concluindo" : "Concluir consulta"}
+            </Button>
+          </form>
+        </div>
       </div>
     );
   }

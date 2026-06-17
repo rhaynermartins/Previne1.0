@@ -46,6 +46,7 @@ type AgendaAppointment = {
   id: string;
   patientName: string;
   patientWhatsapp?: string | null;
+  reminderSent: boolean;
   serviceName: string;
   startTime: string;
   status: AppointmentStatus;
@@ -190,6 +191,7 @@ function AgendaAppointmentCard({
 
       <DentistAppointmentActions
         appointmentId={appointment.id}
+        reminderSent={appointment.reminderSent}
         status={appointment.status}
       />
     </div>
@@ -228,6 +230,12 @@ async function getDentistAgenda(userId: string) {
               select: {
                 name: true,
               },
+            },
+            reminderLogs: {
+              select: {
+                id: true,
+              },
+              take: 1,
             },
             startTime: true,
             status: true,
@@ -290,6 +298,7 @@ export default async function DentistSchedulePage() {
       id: appointment.id,
       patientName: appointment.patient.user.name,
       patientWhatsapp: appointment.patient.user.whatsapp,
+      reminderSent: appointment.reminderLogs.length > 0,
       serviceName: appointment.service.name,
       startTime: appointment.startTime,
       status: appointment.status,

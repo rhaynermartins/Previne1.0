@@ -9,6 +9,7 @@ import {
   confirmAppointmentByDentist,
   refuseAppointmentByDentist,
 } from "@/services/appointmentStatusService";
+import { sendWhatsAppReminder } from "@/services/whatsappService";
 
 export type DentistAppointmentActionState = {
   message: string;
@@ -25,10 +26,12 @@ function revalidateDentistAppointmentViews() {
   revalidatePath("/dashboard/dentista");
   revalidatePath("/dashboard/dentista/agenda");
   revalidatePath("/dashboard/dentista/historico");
+  revalidatePath("/dashboard/dentista/notificacoes");
   revalidatePath("/dashboard/dentista/solicitacoes");
   revalidatePath("/dashboard/paciente");
   revalidatePath("/dashboard/paciente/consultas");
   revalidatePath("/dashboard/paciente/historico");
+  revalidatePath("/dashboard/paciente/notificacoes");
   refresh();
 }
 
@@ -151,4 +154,38 @@ export async function completeDentistAppointment(
   }
 
   return result;
+}
+
+export async function sendDentistAppointmentReminder(
+  _previousState: DentistAppointmentActionState,
+  formData: FormData,
+): Promise<DentistAppointmentActionState> {
+  const auth = await getDentistSessionOrError();
+
+  if (auth.error) {
+    return auth.error;
+  }
+
+  const appointmentId = getFormValue(formData, "appointmentId");
+
+  if (!appointmentId) {
+    return {
+      message: "Consulta nao identificada para envio de lembrete.",
+      status: "error",
+    };
+  }
+
+  const result = await sendWhatsAppReminder({
+    appointmentId,
+    dentistUserId: auth.userId,
+  });
+
+  if (result.status === "success") {
+    revalidateDentistAppointmentViews();
+  }
+
+  return {
+    message: result.message,
+    status: result.status,
+  };
 }

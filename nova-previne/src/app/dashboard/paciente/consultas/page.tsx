@@ -71,6 +71,12 @@ async function getPatientAppointments(userId: string) {
             endTime: true,
             id: true,
             refusalReason: true,
+            reminderLogs: {
+              select: {
+                id: true,
+              },
+              take: 1,
+            },
             service: {
               select: {
                 name: true,
@@ -192,6 +198,7 @@ export default async function PatientAppointmentsPage({
                 dentistSpecialty: appointment.dentist.specialty,
                 endTime: appointment.endTime,
                 id: appointment.id,
+                reminderSent: appointment.reminderLogs.length > 0,
                 refusalReason: appointment.refusalReason,
                 serviceName: appointment.service.name,
                 startTime: appointment.startTime,
