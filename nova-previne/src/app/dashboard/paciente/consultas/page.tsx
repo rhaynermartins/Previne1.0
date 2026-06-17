@@ -70,6 +70,7 @@ async function getPatientAppointments(userId: string) {
             },
             endTime: true,
             id: true,
+            refusalReason: true,
             service: {
               select: {
                 name: true,
@@ -190,6 +191,8 @@ export default async function PatientAppointmentsPage({
                 dentistName: appointment.dentist.user.name,
                 dentistSpecialty: appointment.dentist.specialty,
                 endTime: appointment.endTime,
+                id: appointment.id,
+                refusalReason: appointment.refusalReason,
                 serviceName: appointment.service.name,
                 startTime: appointment.startTime,
                 status: appointment.status,

@@ -9,6 +9,7 @@ import {
 import { Card } from "@/components/ui/card";
 import { StatusBadge } from "@/components/ui/status-badge";
 import type { AppointmentStatus } from "@/generated/prisma/enums";
+import { PatientAppointmentActions } from "@/components/dashboard/patient-appointment-actions";
 
 type AppointmentCardProps = {
   appointment: {
@@ -17,6 +18,8 @@ type AppointmentCardProps = {
     dentistName: string;
     dentistSpecialty: string;
     endTime: string;
+    id?: string;
+    refusalReason?: string | null;
     serviceName: string;
     startTime: string;
     status: AppointmentStatus;
@@ -117,6 +120,32 @@ export function AppointmentCard({ appointment }: AppointmentCardProps) {
           </div>
         </div>
       </div>
+
+      {appointment.refusalReason?.trim() && (
+        <div className="mt-4 rounded-lg border border-[#fecaca] bg-[#fef2f2] p-4">
+          <div className="flex items-start gap-3">
+            <FileText
+              aria-hidden="true"
+              className="mt-0.5 size-5 shrink-0 text-[#b42318]"
+            />
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-[#991b1b]">
+                Motivo da recusa
+              </p>
+              <p className="mt-1 break-words text-sm leading-6 text-gray-text">
+                {appointment.refusalReason}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {appointment.id && (
+        <PatientAppointmentActions
+          appointmentId={appointment.id}
+          status={appointment.status}
+        />
+      )}
     </Card>
   );
 }

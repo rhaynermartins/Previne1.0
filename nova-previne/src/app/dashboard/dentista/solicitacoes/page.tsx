@@ -15,6 +15,7 @@ import { redirect } from "next/navigation";
 
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { DentistAppointmentActions } from "@/components/dashboard/dentist-appointment-actions";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { AppointmentStatus } from "@/generated/prisma/enums";
 import { getCurrentAuthSession } from "@/lib/auth/session";
@@ -43,6 +44,7 @@ type RequestCardProps = {
     createdAt: Date;
     date: Date;
     endTime: string;
+    id: string;
     patientEmail: string;
     patientName: string;
     patientPhone?: string | null;
@@ -254,6 +256,11 @@ function RequestCard({ request }: RequestCardProps) {
           </div>
         </div>
       </div>
+
+      <DentistAppointmentActions
+        appointmentId={request.id}
+        status={request.status}
+      />
     </Card>
   );
 }
@@ -344,8 +351,7 @@ export default async function DentistRequestsPage() {
             </h2>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-text">
               Veja paciente, tratamento, data, horário e descrição prévia do
-              caso. As ações de aceitar ou recusar serão implementadas em etapa
-              própria.
+              caso. Aceite a consulta ou registre o motivo caso precise recusar.
             </p>
           </div>
 
@@ -399,6 +405,7 @@ export default async function DentistRequestsPage() {
                 createdAt: request.createdAt,
                 date: request.date,
                 endTime: request.endTime,
+                id: request.id,
                 patientEmail: request.patient.user.email,
                 patientName: request.patient.user.name,
                 patientPhone: request.patient.user.phone,

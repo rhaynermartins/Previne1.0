@@ -16,6 +16,7 @@ import { redirect } from "next/navigation";
 
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { DentistAppointmentActions } from "@/components/dashboard/dentist-appointment-actions";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { AppointmentStatus } from "@/generated/prisma/enums";
 import { getCurrentAuthSession } from "@/lib/auth/session";
@@ -186,6 +187,11 @@ function AgendaAppointmentCard({
           </div>
         </div>
       </div>
+
+      <DentistAppointmentActions
+        appointmentId={appointment.id}
+        status={appointment.status}
+      />
     </div>
   );
 }
