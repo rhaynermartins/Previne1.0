@@ -5,6 +5,7 @@ import { toggleDentistActive } from "@/app/dashboard/admin/actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
@@ -74,9 +75,10 @@ export default async function AdminDentistsPage() {
         </div>
       </Card>
 
-      <div className="grid gap-4">
-        {dentists.map((dentist) => (
-          <Card key={dentist.id} padding="lg">
+      {dentists.length > 0 ? (
+        <div className="grid gap-4">
+          {dentists.map((dentist) => (
+            <Card key={dentist.id} padding="lg">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="flex min-w-0 items-start gap-3">
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-light-blue text-primary-blue">
@@ -154,9 +156,18 @@ export default async function AdminDentistsPage() {
                 </p>
               </div>
             </div>
-          </Card>
-        ))}
-      </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <Card padding="lg">
+          <EmptyState
+            description="Dentistas cadastrados aparecerão aqui para ativação, desativação e acompanhamento administrativo."
+            icon={<Stethoscope aria-hidden="true" className="size-6" />}
+            title="Nenhum dentista cadastrado."
+          />
+        </Card>
+      )}
     </section>
   );
 }

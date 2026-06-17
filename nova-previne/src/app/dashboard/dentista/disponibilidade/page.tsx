@@ -13,6 +13,8 @@ import { redirect } from "next/navigation";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
+import { MetricCard } from "@/components/ui/metric-card";
 import { getCurrentAuthSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/prisma";
 
@@ -50,13 +52,6 @@ const weekDays = [
   "Sexta-feira",
   "Sábado",
 ];
-
-const summaryTones = {
-  amber: "border-[#fde68a] bg-[#fffbeb] text-[#92400e]",
-  blue: "border-[#b9e4f4] bg-light-blue text-primary-blue",
-  gray: "border-[#e5e7eb] bg-gray-light text-gray-text",
-  green: "border-[#b7ead3] bg-light-green text-primary-green",
-};
 
 function getTodayDate() {
   const today = new Date();
@@ -97,20 +92,13 @@ function SummaryCard({
   value,
 }: SummaryCardProps) {
   return (
-    <Card>
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-bold text-gray-text">{label}</p>
-          <p className="mt-3 text-3xl font-bold text-dark-blue">{value}</p>
-        </div>
-        <span
-          className={`flex size-11 shrink-0 items-center justify-center rounded-lg border ${summaryTones[tone]}`}
-        >
-          {icon}
-        </span>
-      </div>
-      <p className="mt-4 text-sm leading-6 text-gray-text">{description}</p>
-    </Card>
+    <MetricCard
+      description={description}
+      icon={icon}
+      label={label}
+      tone={tone}
+      value={value}
+    />
   );
 }
 
@@ -450,19 +438,12 @@ export default async function DentistAvailabilityPage() {
                 ))}
               </div>
             ) : (
-              <div className="mt-6 rounded-lg border border-dashed border-[#b9e4f4] bg-light-blue/60 p-6">
-                <CalendarRange
-                  aria-hidden="true"
-                  className="size-10 text-primary-blue"
-                />
-                <p className="mt-4 text-base font-bold text-dark-blue">
-                  Nenhum bloqueio futuro encontrado.
-                </p>
-                <p className="mt-2 text-sm leading-6 text-gray-text">
-                  Bloqueios de agenda aparecerão aqui quando forem cadastrados em
-                  etapa própria.
-                </p>
-              </div>
+              <EmptyState
+                className="mt-6"
+                description="Bloqueios de agenda aparecerão aqui quando forem cadastrados em etapa própria."
+                icon={<CalendarRange aria-hidden="true" className="size-6" />}
+                title="Nenhum bloqueio futuro encontrado."
+              />
             )}
           </Card>
         </div>

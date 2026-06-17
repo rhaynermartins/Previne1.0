@@ -248,11 +248,14 @@ export default async function Home() {
 
   return (
     <main>
-      <section id="sobre" className="overflow-hidden bg-white">
-        <Container className="grid min-h-[calc(100vh-80px)] items-center gap-12 py-14 lg:grid-cols-[0.92fr_1.08fr] lg:py-16">
+      <section
+        id="sobre"
+        className="overflow-hidden border-b border-[#d9ebf2] bg-[linear-gradient(180deg,#ffffff_0%,#f7fbfd_100%)]"
+      >
+        <Container className="grid min-h-[calc(88vh-80px)] items-center gap-12 py-12 lg:grid-cols-[0.92fr_1.08fr] lg:py-14">
           <div>
             <Badge variant="green">Clínica Odontológica Nova Previne</Badge>
-            <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-tight text-dark-blue sm:text-5xl lg:text-6xl">
+            <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-tight text-dark-blue text-balance sm:text-5xl lg:text-6xl">
               Nova Previne: há 20 anos cuidando do seu sorriso.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-text">
@@ -283,7 +286,7 @@ export default async function Home() {
             <div className="mt-10 grid gap-3 sm:grid-cols-2">
               {stats.slice(0, 2).map((item) => (
                 <div
-                  className="rounded-lg border border-[#d9ebf2] bg-surface p-4"
+                  className="rounded-lg border border-[#d9ebf2] bg-white/82 p-4 shadow-[0_12px_28px_rgba(0,59,111,0.06)]"
                   key={item.label}
                 >
                   <p className="text-2xl font-bold text-dark-blue">{item.label}</p>
@@ -296,7 +299,7 @@ export default async function Home() {
           </div>
 
           <div className="relative">
-            <div className="overflow-hidden rounded-lg border border-[#d9ebf2] bg-light-blue shadow-[0_24px_70px_rgba(0,59,111,0.16)]">
+            <div className="overflow-hidden rounded-lg border border-[#d9ebf2] bg-light-blue shadow-[0_26px_72px_rgba(0,59,111,0.18)] ring-1 ring-white/80">
               <Image
                 alt="Consultório odontológico moderno da Nova Previne"
                 className="h-[360px] w-full object-cover sm:h-[460px] lg:h-[560px]"
@@ -321,14 +324,20 @@ export default async function Home() {
                 </div>
               </div>
             </div>
+            <div className="absolute left-4 right-4 top-4 rounded-lg border border-[#b9e4f4] bg-white/92 px-4 py-3 text-sm font-bold text-dark-blue shadow-[0_14px_34px_rgba(0,59,111,0.12)] backdrop-blur sm:right-auto sm:max-w-xs">
+              Odontologia preventiva, estética e reabilitação
+            </div>
           </div>
         </Container>
       </section>
 
-      <section className="border-y border-[#d9ebf2] bg-light-blue/60">
+      <section className="border-b border-[#d9ebf2] bg-white">
         <Container className="grid gap-5 py-8 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((item) => (
-            <div className="min-h-24 rounded-lg bg-white/75 p-5" key={item.label}>
+            <div
+              className="min-h-24 rounded-lg border border-[#d9ebf2] bg-surface p-5 shadow-[0_10px_26px_rgba(0,59,111,0.05)]"
+              key={item.label}
+            >
               <p className="text-2xl font-bold text-dark-blue">{item.label}</p>
               <p className="mt-1 text-sm font-medium text-gray-text">
                 {item.description}

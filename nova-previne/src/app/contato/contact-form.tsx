@@ -5,6 +5,7 @@ import { useActionState, useEffect, useRef } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Alert } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
@@ -32,16 +33,17 @@ export function ContactForm() {
   return (
     <Card id="formulario" padding="lg">
       {state.status !== "idle" && (
-        <div
-          className={
+        <Alert
+          className="mb-6"
+          title={
             state.status === "success"
-              ? "mb-6 rounded-lg border border-[#b7ead3] bg-light-green p-4 text-sm font-semibold text-[#006b3d]"
-              : "mb-6 rounded-lg border border-[#fecaca] bg-[#fef2f2] p-4 text-sm font-semibold text-[#991b1b]"
+              ? "Mensagem enviada"
+              : "Não foi possível enviar"
           }
-          role={state.status === "success" ? "status" : "alert"}
+          variant={state.status === "success" ? "success" : "error"}
         >
           {state.message}
-        </div>
+        </Alert>
       )}
 
       <form action={formAction} className="grid gap-5" ref={formRef}>

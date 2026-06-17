@@ -39,10 +39,28 @@ const contactItems = [
 export function Footer() {
   return (
     <footer className="border-t border-[#d9ebf2] bg-white">
+      <Container className="py-8">
+        <div className="grid gap-5 rounded-lg border border-[#b9e4f4] bg-light-blue p-5 shadow-[var(--shadow-card)] sm:grid-cols-[1fr_auto] sm:items-center lg:p-6">
+          <div>
+            <p className="text-sm font-bold text-primary-green">
+              Clínica Odontológica Nova Previne
+            </p>
+            <h2 className="mt-2 text-2xl font-bold leading-tight text-dark-blue">
+              Cuidado, prevenção e acolhimento há 20 anos.
+            </h2>
+          </div>
+          <Link
+            className="inline-flex min-h-11 items-center justify-center rounded-lg border border-primary-green bg-primary-green px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(0,158,90,0.22)] transition hover:bg-[#00834b] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#009e5a]/20"
+            href="/contato"
+          >
+            Falar com a clínica
+          </Link>
+        </div>
+      </Container>
       <Container className="grid gap-10 py-10 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.9fr_1fr] lg:py-12">
         <div>
           <Link className="inline-flex items-center gap-3 text-dark-blue" href="/">
-            <span className="flex size-11 items-center justify-center rounded-lg bg-light-blue text-primary-blue">
+            <span className="flex size-11 items-center justify-center rounded-lg border border-[#b9e4f4] bg-light-blue text-primary-blue">
               <HeartPulse aria-hidden="true" className="size-6" />
             </span>
             <span className="leading-tight">
@@ -88,7 +106,7 @@ export function Footer() {
           <p className="text-sm font-bold text-dark-blue">Atendimento</p>
           {contactItems.map((item) => (
             <div
-              className="flex items-start gap-3 text-sm text-gray-text"
+              className="flex items-start gap-3 rounded-lg border border-[#edf4f8] bg-surface px-3 py-2 text-sm text-gray-text"
               key={item.label}
             >
               <span className="mt-0.5 text-primary-green">{item.icon}</span>

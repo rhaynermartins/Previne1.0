@@ -4,6 +4,7 @@ import { CheckCircle2, Send } from "lucide-react";
 import { useActionState } from "react";
 
 import { Button, ButtonLink } from "@/components/ui/button";
+import { Alert } from "@/components/ui/alert";
 import { Textarea } from "@/components/ui/textarea";
 
 import {
@@ -23,46 +24,36 @@ function StatusMessage({ state }: { state: AppointmentSchedulingState }) {
 
   if (state.status === "success") {
     return (
-      <div
-        className="rounded-lg border border-[#b7ead3] bg-light-green p-4 text-sm font-semibold text-[#006b3d]"
-        role="status"
+      <Alert
+        icon={<CheckCircle2 aria-hidden="true" className="size-5" />}
+        title="Consulta solicitada"
+        variant="success"
       >
-        <div className="flex items-start gap-3">
-          <CheckCircle2
-            aria-hidden="true"
-            className="mt-0.5 size-5 shrink-0"
-          />
-          <div>
-            <p>{state.message}</p>
-            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink
-                className="w-full sm:w-auto"
-                href="/dashboard/paciente/consultas"
-                variant="success"
-              >
-                Ver minhas consultas
-              </ButtonLink>
-              <ButtonLink
-                className="w-full sm:w-auto"
-                href="/dashboard/paciente"
-                variant="secondary"
-              >
-                Voltar ao dashboard
-              </ButtonLink>
-            </div>
-          </div>
+        <p className="font-semibold">{state.message}</p>
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+          <ButtonLink
+            className="w-full sm:w-auto"
+            href="/dashboard/paciente/consultas"
+            variant="success"
+          >
+            Ver minhas consultas
+          </ButtonLink>
+          <ButtonLink
+            className="w-full sm:w-auto"
+            href="/dashboard/paciente"
+            variant="secondary"
+          >
+            Voltar ao dashboard
+          </ButtonLink>
         </div>
-      </div>
+      </Alert>
     );
   }
 
   return (
-    <div
-      className="rounded-lg border border-[#fecaca] bg-[#fef2f2] p-4 text-sm font-semibold text-[#991b1b]"
-      role="alert"
-    >
+    <Alert title="Revise a solicitação" variant="error">
       {state.message}
-    </div>
+    </Alert>
   );
 }
 
@@ -107,15 +98,12 @@ export function AppointmentRequestForm({
         state.errors.dentistId ||
         state.errors.date ||
         state.errors.startTime) && (
-        <div
-          className="rounded-lg border border-[#fecaca] bg-[#fef2f2] p-4 text-sm font-semibold text-[#991b1b]"
-          role="alert"
-        >
+        <Alert title="Seleção incompleta" variant="error">
           {state.errors.serviceId ??
             state.errors.dentistId ??
             state.errors.date ??
             state.errors.startTime}
-        </div>
+        </Alert>
       )}
 
       <Button

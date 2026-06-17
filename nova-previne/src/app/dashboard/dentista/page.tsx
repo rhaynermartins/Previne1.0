@@ -18,6 +18,8 @@ import { redirect } from "next/navigation";
 
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
+import { MetricCard } from "@/components/ui/metric-card";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { AppointmentStatus } from "@/generated/prisma/enums";
 import { getCurrentAuthSession } from "@/lib/auth/session";
@@ -60,13 +62,6 @@ type DentistAppointmentCardProps = {
   };
 };
 
-const summaryTones = {
-  amber: "border-[#fde68a] bg-[#fffbeb] text-[#92400e]",
-  blue: "border-[#b9e4f4] bg-light-blue text-primary-blue",
-  gray: "border-[#e5e7eb] bg-gray-light text-gray-text",
-  green: "border-[#b7ead3] bg-light-green text-primary-green",
-};
-
 function getFirstName(name: string) {
   return name.split(" ").filter(Boolean)[0] ?? name;
 }
@@ -107,20 +102,13 @@ function SummaryCard({
   value,
 }: SummaryCardProps) {
   return (
-    <Card>
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-bold text-gray-text">{label}</p>
-          <p className="mt-3 text-3xl font-bold text-dark-blue">{value}</p>
-        </div>
-        <span
-          className={`flex size-11 shrink-0 items-center justify-center rounded-lg border ${summaryTones[tone]}`}
-        >
-          {icon}
-        </span>
-      </div>
-      <p className="mt-4 text-sm leading-6 text-gray-text">{description}</p>
-    </Card>
+    <MetricCard
+      description={description}
+      icon={icon}
+      label={label}
+      tone={tone}
+      value={value}
+    />
   );
 }
 
@@ -435,19 +423,12 @@ export default async function DentistDashboardPage() {
               ))}
             </div>
           ) : (
-            <div className="mt-6 rounded-lg border border-dashed border-[#b9e4f4] bg-light-blue/60 p-6">
-              <CalendarDays
-                aria-hidden="true"
-                className="size-10 text-primary-blue"
-              />
-              <p className="mt-4 text-base font-bold text-dark-blue">
-                Nenhuma consulta encontrada para hoje.
-              </p>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-text">
-                Quando houver atendimento solicitado ou confirmado para a data
-                atual, ele aparecerá neste espaço de acompanhamento rápido.
-              </p>
-            </div>
+            <EmptyState
+              className="mt-6"
+              description="Quando houver atendimento solicitado ou confirmado para a data atual, ele aparecerá neste espaço de acompanhamento rápido."
+              icon={<CalendarDays aria-hidden="true" className="size-6" />}
+              title="Nenhuma consulta encontrada para hoje."
+            />
           )}
         </Card>
 
@@ -564,19 +545,13 @@ export default async function DentistDashboardPage() {
               ))}
             </div>
           ) : (
-            <div className="mt-6 rounded-lg border border-dashed border-[#b7ead3] bg-light-green/60 p-6">
-              <CheckCircle2
-                aria-hidden="true"
-                className="size-10 text-primary-green"
-              />
-              <p className="mt-4 text-base font-bold text-dark-blue">
-                Nenhuma solicitação pendente.
-              </p>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-text">
-                Novas solicitações de pacientes ficarão destacadas aqui para
-                acompanhamento inicial.
-              </p>
-            </div>
+            <EmptyState
+              className="mt-6"
+              description="Novas solicitações de pacientes ficarão destacadas aqui para acompanhamento inicial."
+              icon={<CheckCircle2 aria-hidden="true" className="size-6" />}
+              title="Nenhuma solicitação pendente."
+              tone="green"
+            />
           )}
         </Card>
 

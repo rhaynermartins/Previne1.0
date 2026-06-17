@@ -5,6 +5,7 @@ import { useActionState, useEffect, useRef } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Alert } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 
 import { login, logout, type LoginFormState } from "./actions";
@@ -36,21 +37,17 @@ function StatusMessage({ state }: { state: LoginFormState }) {
   }
 
   return (
-    <div
-      className={
-        state.status === "success"
-          ? "rounded-lg border border-[#b7ead3] bg-light-green p-4 text-sm font-semibold text-[#006b3d]"
-          : "rounded-lg border border-[#fecaca] bg-[#fef2f2] p-4 text-sm font-semibold text-[#991b1b]"
-      }
-      role={state.status === "success" ? "status" : "alert"}
+    <Alert
+      title={state.status === "success" ? "Acesso confirmado" : "Não foi possível entrar"}
+      variant={state.status === "success" ? "success" : "error"}
     >
-      {state.message}
+      <p className="font-semibold">{state.message}</p>
       {state.authenticatedUser && (
         <span className="mt-1 block font-normal">
           Você entrou como {state.authenticatedUser.name}.
         </span>
       )}
-    </div>
+    </Alert>
   );
 }
 

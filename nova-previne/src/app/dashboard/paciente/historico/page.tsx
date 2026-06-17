@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import { AppointmentCard } from "@/components/dashboard/appointment-card";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { AppointmentStatus } from "@/generated/prisma/enums";
 import { getCurrentAuthSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/prisma";
@@ -148,16 +149,11 @@ export default async function PatientAppointmentHistoryPage() {
         </div>
       ) : (
         <Card padding="lg">
-          <div className="rounded-lg border border-dashed border-[#b9e4f4] bg-light-blue/60 p-6">
-            <History aria-hidden="true" className="size-10 text-primary-blue" />
-            <h3 className="mt-4 text-xl font-bold text-dark-blue">
-              Nenhum histórico encontrado.
-            </h3>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-text">
-              Quando você tiver consultas concluídas ou registros passados, eles
-              aparecerão nesta área.
-            </p>
-          </div>
+          <EmptyState
+            description="Quando você tiver consultas concluídas ou registros passados, eles aparecerão nesta área."
+            icon={<History aria-hidden="true" className="size-6" />}
+            title="Nenhum histórico encontrado."
+          />
         </Card>
       )}
 

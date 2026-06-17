@@ -60,11 +60,11 @@ const commitments = [
 export default function AboutPage() {
   return (
     <main>
-      <section className="overflow-hidden bg-white">
+      <section className="overflow-hidden border-b border-[#d9ebf2] bg-[linear-gradient(180deg,#ffffff_0%,#f7fbfd_100%)]">
         <Container className="grid gap-12 py-14 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:py-20">
           <div>
             <Badge variant="green">Sobre a Nova Previne</Badge>
-            <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-tight text-dark-blue sm:text-5xl">
+            <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-tight text-dark-blue text-balance sm:text-5xl">
               Uma clínica odontológica construída sobre cuidado, confiança e
               prevenção.
             </h1>

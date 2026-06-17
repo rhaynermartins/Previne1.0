@@ -10,7 +10,13 @@
   --light-green: #eaf8f1;
   --gray-text: #4b5563;
   --gray-light: #f3f4f6;
-  --surface: #f8fcfe;
+  --surface: #f7fbfd;
+  --surface-strong: #f0f8fc;
+  --border-soft: #d9ebf2;
+  --shadow-card: 0 16px 44px rgba(0, 59, 111, 0.08);
+  --shadow-card-hover: 0 22px 56px rgba(0, 59, 111, 0.13);
+  --ring-blue: rgba(0, 143, 211, 0.14);
+  --ring-green: rgba(0, 158, 90, 0.14);
 }
 
 @theme inline {
@@ -24,6 +30,7 @@
   --color-gray-text: var(--gray-text);
   --color-gray-light: var(--gray-light);
   --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
   --font-sans:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -35,7 +42,10 @@ html {
 }
 
 body {
-  background: var(--surface);
+  background:
+    linear-gradient(180deg, rgba(234, 247, 252, 0.76) 0%, rgba(247, 251, 253, 0) 360px),
+    linear-gradient(135deg, rgba(234, 248, 241, 0.52) 0%, rgba(255, 255, 255, 0) 42%),
+    var(--surface);
   color: var(--foreground);
   font-family:
     Inter,
@@ -52,6 +62,11 @@ body {
   box-sizing: border-box;
 }
 
+*:focus-visible {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 3px;
+}
+
 a {
   text-decoration: none;
 }
@@ -66,4 +81,39 @@ textarea {
 ::selection {
   background: rgba(0, 158, 90, 0.18);
   color: var(--dark-blue);
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #edf7fb;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b9dce9;
+  border: 2px solid #edf7fb;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8bc7dc;
+}
+
+input[type="date"],
+input[type="time"] {
+  color-scheme: light;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

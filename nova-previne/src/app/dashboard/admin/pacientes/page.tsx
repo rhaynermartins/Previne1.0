@@ -2,6 +2,7 @@ import { CalendarDays, Mail, Phone, UserRound } from "lucide-react";
 import type { Metadata } from "next";
 
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { UserRole } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 
@@ -137,15 +138,11 @@ export default async function AdminPatientsPage() {
         </div>
       ) : (
         <Card padding="lg">
-          <div className="rounded-lg border border-dashed border-[#b9e4f4] bg-light-blue/60 p-6">
-            <UserRound aria-hidden="true" className="size-10 text-primary-blue" />
-            <h3 className="mt-4 text-xl font-bold text-dark-blue">
-              Nenhum paciente encontrado.
-            </h3>
-            <p className="mt-2 text-sm leading-6 text-gray-text">
-              Pacientes cadastrados aparecerão nesta listagem administrativa.
-            </p>
-          </div>
+          <EmptyState
+            description="Pacientes cadastrados aparecerão nesta listagem administrativa."
+            icon={<UserRound aria-hidden="true" className="size-6" />}
+            title="Nenhum paciente encontrado."
+          />
         </Card>
       )}
     </section>

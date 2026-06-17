@@ -167,11 +167,11 @@ export default async function DentistsPage() {
 
   return (
     <main>
-      <section className="bg-white">
+      <section className="border-b border-[#d9ebf2] bg-[linear-gradient(180deg,#ffffff_0%,#f7fbfd_100%)]">
         <Container className="py-14 lg:py-20">
           <div className="max-w-4xl">
             <Badge variant="green">Dentistas Nova Previne</Badge>
-            <h1 className="mt-6 text-4xl font-bold leading-tight text-dark-blue sm:text-5xl">
+            <h1 className="mt-6 text-4xl font-bold leading-tight text-dark-blue text-balance sm:text-5xl">
               Profissionais preparados para cuidar do seu sorriso com segurança.
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-text">

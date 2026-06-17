@@ -2,6 +2,7 @@ import { CalendarDays, Clock, Stethoscope, UserRound } from "lucide-react";
 import type { Metadata } from "next";
 
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { AppointmentStatus } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
@@ -120,9 +121,10 @@ export default async function AdminAppointmentsPage() {
         ))}
       </div>
 
-      <div className="grid gap-4">
-        {appointments.map((appointment) => (
-          <Card key={appointment.id} padding="lg">
+      {appointments.length > 0 ? (
+        <div className="grid gap-4">
+          {appointments.map((appointment) => (
+            <Card key={appointment.id} padding="lg">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="flex min-w-0 items-start gap-3">
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-light-blue text-primary-blue">
@@ -203,9 +205,18 @@ export default async function AdminAppointmentsPage() {
                 </p>
               </div>
             )}
-          </Card>
-        ))}
-      </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <Card padding="lg">
+          <EmptyState
+            description="Assim que pacientes solicitarem consultas, os registros aparecerão nesta visão administrativa."
+            icon={<CalendarDays aria-hidden="true" className="size-6" />}
+            title="Nenhuma consulta registrada."
+          />
+        </Card>
+      )}
     </section>
   );
 }

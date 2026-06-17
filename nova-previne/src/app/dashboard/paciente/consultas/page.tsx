@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import { AppointmentCard } from "@/components/dashboard/appointment-card";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { AppointmentStatus } from "@/generated/prisma/enums";
 import { getCurrentAuthSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/prisma";
@@ -210,27 +211,21 @@ export default async function PatientAppointmentsPage({
         </div>
       ) : (
         <Card padding="lg">
-          <div className="rounded-lg border border-dashed border-[#b9e4f4] bg-light-blue/60 p-6">
-            <CalendarClock
-              aria-hidden="true"
-              className="size-10 text-primary-blue"
-            />
-            <h3 className="mt-4 text-xl font-bold text-dark-blue">
-              Nenhuma consulta futura encontrada.
-            </h3>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-text">
-              Quando houver uma consulta solicitada, confirmada, recusada ou
-              cancelada para uma data futura, ela aparecerá nesta listagem.
-            </p>
-            <ButtonLink
-              className="mt-5 w-full sm:w-auto"
-              href="/dashboard/paciente/agendamento"
-              icon={<PlusCircle aria-hidden="true" className="size-4" />}
-              variant="success"
-            >
-              Iniciar novo agendamento
-            </ButtonLink>
-          </div>
+          <EmptyState
+            actions={
+              <ButtonLink
+                className="w-full sm:w-auto"
+                href="/dashboard/paciente/agendamento"
+                icon={<PlusCircle aria-hidden="true" className="size-4" />}
+                variant="success"
+              >
+                Iniciar novo agendamento
+              </ButtonLink>
+            }
+            description="Quando houver uma consulta solicitada, confirmada, recusada ou cancelada para uma data futura, ela aparecerá nesta listagem."
+            icon={<CalendarClock aria-hidden="true" className="size-6" />}
+            title="Nenhuma consulta futura encontrada."
+          />
         </Card>
       )}
 

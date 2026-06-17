@@ -10,6 +10,7 @@ import type { Metadata } from "next";
 
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { MetricCard } from "@/components/ui/metric-card";
 import { AppointmentStatus, UserRole } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 
@@ -30,13 +31,6 @@ type SummaryCardProps = {
   value: number;
 };
 
-const summaryTones = {
-  amber: "border-[#fde68a] bg-[#fffbeb] text-[#92400e]",
-  blue: "border-[#b9e4f4] bg-light-blue text-primary-blue",
-  gray: "border-[#e5e7eb] bg-gray-light text-gray-text",
-  green: "border-[#b7ead3] bg-light-green text-primary-green",
-};
-
 function SummaryCard({
   description,
   icon,
@@ -45,20 +39,13 @@ function SummaryCard({
   value,
 }: SummaryCardProps) {
   return (
-    <Card>
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-bold text-gray-text">{label}</p>
-          <p className="mt-3 text-3xl font-bold text-dark-blue">{value}</p>
-        </div>
-        <span
-          className={`flex size-11 shrink-0 items-center justify-center rounded-lg border ${summaryTones[tone]}`}
-        >
-          {icon}
-        </span>
-      </div>
-      <p className="mt-4 text-sm leading-6 text-gray-text">{description}</p>
-    </Card>
+    <MetricCard
+      description={description}
+      icon={icon}
+      label={label}
+      tone={tone}
+      value={value}
+    />
   );
 }
 

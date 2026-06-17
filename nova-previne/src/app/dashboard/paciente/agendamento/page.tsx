@@ -7,6 +7,7 @@ import {
   CheckCircle2,
   Clock,
   FileText,
+  Info,
   ShieldCheck,
   Stethoscope,
   UserRound,
@@ -15,6 +16,7 @@ import { redirect } from "next/navigation";
 
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/input";
 import { UserRole } from "@/generated/prisma/enums";
 import { getCurrentAuthSession } from "@/lib/auth/session";
@@ -147,37 +149,49 @@ function getCurrentStep({
 }
 
 function Stepper({ currentStep }: { currentStep: number }) {
-  return (
-    <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-6">
-      {steps.map((step, index) => {
-        const stepNumber = index + 1;
-        const completed = stepNumber < currentStep;
-        const active = stepNumber === currentStep;
+  const progress = Math.max(0, Math.min(100, ((currentStep - 1) / (steps.length - 1)) * 100));
 
-        return (
-          <div
-            className={
-              active
-                ? "rounded-lg border border-[#b9e4f4] bg-light-blue p-3 text-primary-blue"
-                : completed
-                  ? "rounded-lg border border-[#b7ead3] bg-light-green p-3 text-primary-green"
-                  : "rounded-lg border border-[#e5edf3] bg-white p-3 text-gray-text"
-            }
-            key={step}
-          >
-            <div className="flex items-center gap-2">
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-lg border border-current text-xs font-bold">
-                {completed ? (
-                  <CheckCircle2 aria-hidden="true" className="size-4" />
-                ) : (
-                  stepNumber
-                )}
-              </span>
-              <span className="text-sm font-bold">{step}</span>
+  return (
+    <div className="grid gap-4">
+      <div className="h-2 overflow-hidden rounded-full bg-[#edf7fb]">
+        <div
+          className="h-full rounded-full bg-[linear-gradient(90deg,#008fd3,#009e5a)] transition-all duration-300"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-3 xl:grid-cols-6">
+        {steps.map((step, index) => {
+          const stepNumber = index + 1;
+          const completed = stepNumber < currentStep;
+          const active = stepNumber === currentStep;
+
+          return (
+            <div
+              aria-current={active ? "step" : undefined}
+              className={
+                active
+                  ? "rounded-lg border border-[#b9e4f4] bg-light-blue p-3 text-primary-blue shadow-[0_10px_24px_rgba(0,143,211,0.1)]"
+                  : completed
+                    ? "rounded-lg border border-[#b7ead3] bg-light-green p-3 text-primary-green"
+                    : "rounded-lg border border-[#e5edf3] bg-white p-3 text-gray-text"
+              }
+              key={step}
+            >
+              <div className="flex items-center gap-2">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-lg border border-current text-xs font-bold">
+                  {completed ? (
+                    <CheckCircle2 aria-hidden="true" className="size-4" />
+                  ) : (
+                    stepNumber
+                  )}
+                </span>
+                <span className="text-sm font-bold">{step}</span>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -410,8 +424,8 @@ export default async function PatientSchedulingPage({
                   <ButtonLink
                     className={
                       selected
-                        ? "h-full justify-start border-primary-green bg-light-green text-left text-primary-green"
-                        : "h-full justify-start text-left"
+                        ? "h-full min-h-28 items-start justify-start whitespace-normal border-primary-green bg-light-green text-left text-primary-green"
+                        : "h-full min-h-28 items-start justify-start whitespace-normal text-left"
                     }
                     href={buildSchedulingHref({
                       serviceId: service.id,
@@ -452,12 +466,12 @@ export default async function PatientSchedulingPage({
                   const selected = dentist.id === selectedDentist?.id;
 
                   return (
-                    <ButtonLink
-                      className={
-                        selected
-                          ? "h-full justify-start border-primary-blue bg-light-blue text-left text-primary-blue"
-                          : "h-full justify-start text-left"
-                      }
+                  <ButtonLink
+                    className={
+                      selected
+                          ? "h-full min-h-28 items-start justify-start whitespace-normal border-primary-blue bg-light-blue text-left text-primary-blue"
+                          : "h-full min-h-28 items-start justify-start whitespace-normal text-left"
+                    }
                       href={buildSchedulingHref({
                         dentistId: dentist.id,
                         serviceId: selectedService.id,
@@ -516,7 +530,7 @@ export default async function PatientSchedulingPage({
                   type="date"
                 />
                 <Button
-                  className="self-end"
+                  className="w-full self-end sm:w-auto"
                   icon={<ArrowRight aria-hidden="true" className="size-4" />}
                   type="submit"
                   variant="primary"
@@ -655,8 +669,11 @@ export default async function PatientSchedulingPage({
 
 function EmptyStep({ message }: { message: string }) {
   return (
-    <div className="mt-6 rounded-lg border border-dashed border-[#b9e4f4] bg-light-blue/60 p-5">
-      <p className="text-sm font-semibold leading-6 text-gray-text">{message}</p>
-    </div>
+    <EmptyState
+      className="mt-6"
+      description={message}
+      icon={<Info aria-hidden="true" className="size-6" />}
+      title="Etapa aguardando seleção."
+    />
   );
 }

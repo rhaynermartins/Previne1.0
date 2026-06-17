@@ -9,6 +9,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { prisma } from "@/lib/prisma";
@@ -122,9 +123,10 @@ export default async function AdminServicesPage() {
         </form>
       </Card>
 
-      <div className="grid gap-4">
-        {services.map((service) => (
-          <Card key={service.id} padding="lg">
+      {services.length > 0 ? (
+        <div className="grid gap-4">
+          {services.map((service) => (
+            <Card key={service.id} padding="lg">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
@@ -203,9 +205,18 @@ export default async function AdminServicesPage() {
                 </Button>
               </div>
             </form>
-          </Card>
-        ))}
-      </div>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <Card padding="lg">
+          <EmptyState
+            description="Cadastre o primeiro serviço odontológico para disponibilizá-lo nas páginas públicas e no agendamento."
+            icon={<ClipboardList aria-hidden="true" className="size-6" />}
+            title="Nenhum serviço cadastrado."
+          />
+        </Card>
+      )}
     </section>
   );
 }

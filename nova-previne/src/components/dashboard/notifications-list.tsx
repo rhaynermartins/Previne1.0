@@ -15,6 +15,7 @@ import { NotificationReadAction } from "@/components/dashboard/notification-read
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import {
   NotificationType,
   type NotificationType as NotificationTypeValue,
@@ -58,7 +59,7 @@ const notificationTypeMeta: Record<
   },
   [NotificationType.APPOINTMENT_COMPLETED]: {
     icon: <ClipboardCheck aria-hidden="true" className="size-5" />,
-    label: "Consulta concluida",
+    label: "Consulta concluída",
     tone: "green",
   },
   [NotificationType.REMINDER_SENT]: {
@@ -123,7 +124,7 @@ function NotificationCard({
             <div className="flex flex-wrap items-center gap-2">
               <Badge variant={meta.tone}>{meta.label}</Badge>
               <Badge variant={notification.read ? "gray" : "green"}>
-                {notification.read ? "Lida" : "Nao lida"}
+                {notification.read ? "Lida" : "Não lida"}
               </Badge>
             </div>
             <h3 className="mt-3 break-words text-xl font-bold text-dark-blue">
@@ -162,19 +163,19 @@ export function NotificationsList({
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-start">
           <div>
             <p className="text-sm font-bold text-primary-green">
-              Notificacoes internas
+              Notificações internas
             </p>
             <h2 className="mt-3 max-w-3xl text-2xl font-bold leading-tight text-dark-blue sm:text-3xl">
               Acompanhe as atualizacoes da sua conta.
             </h2>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-gray-text">
               Veja avisos sobre consultas, lembretes e mensagens relevantes da
-              Nova Previne em um historico simples e organizado.
+              Nova Previne em um histórico simples e organizado.
             </p>
           </div>
 
           <div className="rounded-lg border border-[#b9e4f4] bg-light-blue p-4 text-sm font-semibold text-dark-blue lg:text-right">
-            {unreadCount} {unreadCount === 1 ? "nao lida" : "nao lidas"}
+            {unreadCount} {unreadCount === 1 ? "não lida" : "não lidas"}
           </div>
         </div>
       </Card>
@@ -190,23 +191,16 @@ export function NotificationsList({
         </div>
       ) : (
         <Card padding="lg">
-          <div className="rounded-lg border border-dashed border-[#b9e4f4] bg-light-blue/60 p-6">
-            <MailOpen aria-hidden="true" className="size-10 text-primary-blue" />
-            <h3 className="mt-4 text-xl font-bold text-dark-blue">
-              Nenhuma notificacao encontrada.
-            </h3>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-text">
-              Quando houver mudancas em consultas ou avisos internos, eles
-              aparecerao nesta central.
-            </p>
-            <ButtonLink
-              className="mt-5 w-full sm:w-auto"
-              href={homeHref}
-              variant="secondary"
-            >
-              Voltar ao dashboard
-            </ButtonLink>
-          </div>
+          <EmptyState
+            actions={
+              <ButtonLink className="w-full sm:w-auto" href={homeHref} variant="secondary">
+                Voltar ao dashboard
+              </ButtonLink>
+            }
+            description="Quando houver mudanças em consultas, lembretes ou avisos internos, eles aparecerão nesta central."
+            icon={<MailOpen aria-hidden="true" className="size-6" />}
+            title="Nenhuma notificação por enquanto."
+          />
         </Card>
       )}
     </section>

@@ -17,6 +17,8 @@ import { redirect } from "next/navigation";
 import { ButtonLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { DentistAppointmentActions } from "@/components/dashboard/dentist-appointment-actions";
+import { EmptyState } from "@/components/ui/empty-state";
+import { MetricCard } from "@/components/ui/metric-card";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { AppointmentStatus } from "@/generated/prisma/enums";
 import { getCurrentAuthSession } from "@/lib/auth/session";
@@ -56,13 +58,6 @@ const agendaStatuses = [
   AppointmentStatus.REQUESTED,
   AppointmentStatus.CONFIRMED,
 ];
-
-const summaryTones = {
-  amber: "border-[#fde68a] bg-[#fffbeb] text-[#92400e]",
-  blue: "border-[#b9e4f4] bg-light-blue text-primary-blue",
-  gray: "border-[#e5e7eb] bg-gray-light text-gray-text",
-  green: "border-[#b7ead3] bg-light-green text-primary-green",
-};
 
 const weekDayFormatter = new Intl.DateTimeFormat("pt-BR", {
   timeZone: "UTC",
@@ -113,20 +108,13 @@ function SummaryCard({
   value,
 }: SummaryCardProps) {
   return (
-    <Card>
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-bold text-gray-text">{label}</p>
-          <p className="mt-3 text-3xl font-bold text-dark-blue">{value}</p>
-        </div>
-        <span
-          className={`flex size-11 shrink-0 items-center justify-center rounded-lg border ${summaryTones[tone]}`}
-        >
-          {icon}
-        </span>
-      </div>
-      <p className="mt-4 text-sm leading-6 text-gray-text">{description}</p>
-    </Card>
+    <MetricCard
+      description={description}
+      icon={icon}
+      label={label}
+      tone={tone}
+      value={value}
+    />
   );
 }
 
@@ -553,18 +541,13 @@ export default async function DentistSchedulePage() {
                 ))}
               </div>
             ) : (
-              <div className="mt-6 rounded-lg border border-dashed border-[#b7ead3] bg-light-green/60 p-6">
-                <CheckCircle2
-                  aria-hidden="true"
-                  className="size-10 text-primary-green"
-                />
-                <p className="mt-4 text-base font-bold text-dark-blue">
-                  Nenhum bloqueio futuro.
-                </p>
-                <p className="mt-2 text-sm leading-6 text-gray-text">
-                  Bloqueios cadastrados aparecerão nesta área de apoio.
-                </p>
-              </div>
+              <EmptyState
+                className="mt-6"
+                description="Bloqueios cadastrados aparecerão nesta área de apoio."
+                icon={<CheckCircle2 aria-hidden="true" className="size-6" />}
+                title="Nenhum bloqueio futuro."
+                tone="green"
+              />
             )}
           </Card>
         </div>

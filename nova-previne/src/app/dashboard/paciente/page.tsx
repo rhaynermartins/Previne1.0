@@ -15,6 +15,8 @@ import { redirect } from "next/navigation";
 import { ButtonLink } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
+import { MetricCard } from "@/components/ui/metric-card";
 import { AppointmentStatus } from "@/generated/prisma/enums";
 import { getCurrentAuthSession } from "@/lib/auth/session";
 import { prisma } from "@/lib/prisma";
@@ -34,13 +36,6 @@ type SummaryCardProps = {
   label: string;
   tone: "blue" | "green" | "amber" | "gray";
   value: number;
-};
-
-const summaryTones = {
-  amber: "border-[#fde68a] bg-[#fffbeb] text-[#92400e]",
-  blue: "border-[#b9e4f4] bg-light-blue text-primary-blue",
-  gray: "border-[#e5e7eb] bg-gray-light text-gray-text",
-  green: "border-[#b7ead3] bg-light-green text-primary-green",
 };
 
 function getFirstName(name: string) {
@@ -78,20 +73,13 @@ function SummaryCard({
   value,
 }: SummaryCardProps) {
   return (
-    <Card>
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-bold text-gray-text">{label}</p>
-          <p className="mt-3 text-3xl font-bold text-dark-blue">{value}</p>
-        </div>
-        <span
-          className={`flex size-11 shrink-0 items-center justify-center rounded-lg border ${summaryTones[tone]}`}
-        >
-          {icon}
-        </span>
-      </div>
-      <p className="mt-4 text-sm leading-6 text-gray-text">{description}</p>
-    </Card>
+    <MetricCard
+      description={description}
+      icon={icon}
+      label={label}
+      tone={tone}
+      value={value}
+    />
   );
 }
 
@@ -325,27 +313,22 @@ export default async function PatientDashboardPage() {
               </div>
             </div>
           ) : (
-            <div className="mt-6 rounded-lg border border-dashed border-[#b9e4f4] bg-light-blue/60 p-6">
-              <CalendarClock
-                aria-hidden="true"
-                className="size-10 text-primary-blue"
-              />
-              <p className="mt-4 text-base font-bold text-dark-blue">
-                Você ainda não possui consulta futura em destaque.
-              </p>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-text">
-                Quando uma solicitação ou confirmação de atendimento existir, ela
-                aparecerá nesta área.
-              </p>
-              <ButtonLink
-                className="mt-5 w-full sm:w-auto"
-                href="/dashboard/paciente/agendamento"
-                icon={<PlusCircle aria-hidden="true" className="size-4" />}
-                variant="success"
-              >
-                Iniciar novo agendamento
-              </ButtonLink>
-            </div>
+            <EmptyState
+              actions={
+                <ButtonLink
+                  className="w-full sm:w-auto"
+                  href="/dashboard/paciente/agendamento"
+                  icon={<PlusCircle aria-hidden="true" className="size-4" />}
+                  variant="success"
+                >
+                  Iniciar novo agendamento
+                </ButtonLink>
+              }
+              className="mt-6"
+              description="Quando uma solicitação ou confirmação de atendimento existir, ela aparecerá nesta área."
+              icon={<CalendarClock aria-hidden="true" className="size-6" />}
+              title="Você ainda não possui consulta futura em destaque."
+            />
           )}
         </Card>
 

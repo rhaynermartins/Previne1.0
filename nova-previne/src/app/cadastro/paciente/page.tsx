@@ -38,11 +38,11 @@ const benefits = [
 export default function PatientRegisterPage() {
   return (
     <main>
-      <section className="bg-white">
+      <section className="border-b border-[#d9ebf2] bg-[linear-gradient(180deg,#ffffff_0%,#f7fbfd_100%)]">
         <Container className="grid gap-12 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:py-20">
           <div className="lg:sticky lg:top-28">
             <Badge variant="green">Cadastro de paciente</Badge>
-            <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-tight text-dark-blue sm:text-5xl">
+            <h1 className="mt-6 max-w-3xl text-4xl font-bold leading-tight text-dark-blue text-balance sm:text-5xl">
               Crie sua conta para organizar seus atendimentos na Nova Previne.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-text">

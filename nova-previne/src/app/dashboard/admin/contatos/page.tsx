@@ -5,6 +5,7 @@ import { markContactMessageAsRead } from "@/app/dashboard/admin/actions";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { EmptyState } from "@/components/ui/empty-state";
 import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
@@ -158,18 +159,11 @@ export default async function AdminContactMessagesPage() {
         </div>
       ) : (
         <Card padding="lg">
-          <div className="rounded-lg border border-dashed border-[#b9e4f4] bg-light-blue/60 p-6">
-            <MessageSquare
-              aria-hidden="true"
-              className="size-10 text-primary-blue"
-            />
-            <h3 className="mt-4 text-xl font-bold text-dark-blue">
-              Nenhuma mensagem encontrada.
-            </h3>
-            <p className="mt-2 text-sm leading-6 text-gray-text">
-              Contatos enviados pelo formulário público aparecerão aqui.
-            </p>
-          </div>
+          <EmptyState
+            description="Contatos enviados pelo formulário público aparecerão aqui."
+            icon={<MessageSquare aria-hidden="true" className="size-6" />}
+            title="Nenhuma mensagem encontrada."
+          />
         </Card>
       )}
     </section>

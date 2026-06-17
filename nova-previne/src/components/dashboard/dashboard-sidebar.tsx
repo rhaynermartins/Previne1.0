@@ -156,17 +156,20 @@ export function DashboardSidebar({
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-20 z-30 rounded-lg border border-[#d9ebf2] bg-white p-2 shadow-[0_14px_38px_rgba(0,59,111,0.08)] sm:p-3 lg:top-28">
+    <aside className="sticky top-20 z-30 min-w-0 overflow-hidden rounded-lg border border-[#d9ebf2] bg-white/95 p-2 shadow-[var(--shadow-card)] ring-1 ring-white/70 backdrop-blur sm:p-3 lg:top-28">
       <div className="hidden border-b border-[#edf4f8] px-3 pb-4 lg:block">
         <p className="text-sm font-bold text-dark-blue">{areaLabel}</p>
         <p className="mt-1 text-xs font-medium text-gray-text">
           Nova Previne
         </p>
+        <p className="mt-3 rounded-lg border border-[#b7ead3] bg-light-green px-3 py-2 text-xs font-bold text-[#006b3d]">
+          Painel seguro
+        </p>
       </div>
 
       <nav
         aria-label={navLabel}
-        className="flex snap-x gap-2 overflow-x-auto pb-1 lg:mt-3 lg:grid lg:overflow-visible lg:pb-0"
+        className="flex min-w-0 snap-x gap-2 overflow-x-auto pb-1 lg:mt-3 lg:grid lg:overflow-visible lg:pb-0"
       >
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -176,10 +179,10 @@ export function DashboardSidebar({
             <Link
               aria-current={active ? "page" : undefined}
               className={cn(
-                "flex min-h-11 shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-lg px-3 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-blue",
+                "flex min-h-11 shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-lg border px-3 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#008fd3]/15",
                 active
-                  ? "bg-light-blue text-primary-blue"
-                  : "text-gray-text hover:bg-surface hover:text-dark-blue",
+                  ? "border-[#b9e4f4] bg-light-blue text-primary-blue shadow-[0_8px_22px_rgba(0,143,211,0.08)]"
+                  : "border-transparent text-gray-text hover:border-[#d9ebf2] hover:bg-surface hover:text-dark-blue",
               )}
               href={item.href}
               key={item.href}
@@ -189,7 +192,7 @@ export function DashboardSidebar({
               {item.href.includes("/notificacoes") &&
                 unreadNotificationsCount > 0 && (
                   <span
-                    aria-label={`${unreadNotificationsCount} notificacoes nao lidas`}
+                    aria-label={`${unreadNotificationsCount} notificações não lidas`}
                     className="ml-auto inline-flex min-w-6 items-center justify-center rounded-full bg-primary-green px-2 py-0.5 text-xs font-bold text-white"
                   >
                     {unreadNotificationsCount > 99
