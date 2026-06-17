@@ -331,7 +331,7 @@ export default async function Home() {
               </ButtonLink>
             </div>
 
-            <div className="mt-8 hidden gap-3 sm:grid sm:grid-cols-3">
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
               {heroSignals.map((item) => (
                 <div
                   className="flex items-center gap-3 rounded-lg border border-white/16 bg-white/12 px-4 py-3 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(0,0,0,0.12)] backdrop-blur-xl"
@@ -390,12 +390,11 @@ export default async function Home() {
       </section>
 
       <section className="border-b border-[#d9ebf2] bg-white">
-        <Container className="-mt-5 grid gap-4 pb-10 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((item, index) => (
+        <Container className="grid gap-4 py-8 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((item) => (
             <div
-              className="premium-panel motion-reveal min-h-28 rounded-lg p-5"
+              className="premium-panel min-h-28 rounded-lg p-5"
               key={item.label}
-              style={{ animationDelay: `${index * 80}ms` }}
             >
               <p className="text-2xl font-bold text-dark-blue">{item.label}</p>
               <p className="mt-2 text-sm font-medium leading-6 text-gray-text">
