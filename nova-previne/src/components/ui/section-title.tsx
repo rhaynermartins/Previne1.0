@@ -26,7 +26,7 @@ export function SectionTitle({
       )}
     >
       {eyebrow && (
-        <p className="mb-3 inline-flex rounded-full border border-[#b7ead3] bg-light-green px-3 py-1 text-sm font-bold text-[#006b3d]">
+        <p className="mb-3 inline-flex rounded-full border border-[#b7ead3] bg-light-green px-3 py-1 text-sm font-bold text-[#006b3d] shadow-[0_8px_20px_rgba(0,158,90,0.08)]">
           {eyebrow}
         </p>
       )}

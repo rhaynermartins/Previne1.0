@@ -150,7 +150,8 @@ export default async function AdminDashboardPage() {
 
   return (
     <section className="grid gap-5">
-      <Card padding="lg">
+      <Card className="overflow-hidden" padding="lg">
+        <div className="-mx-5 -mt-5 mb-5 h-1.5 bg-[image:var(--gradient-brand)] sm:-mx-6 lg:-mx-7" />
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-start">
           <div>
             <p className="text-sm font-bold text-primary-green">

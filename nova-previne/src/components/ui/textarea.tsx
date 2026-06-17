@@ -32,7 +32,7 @@ export function Textarea({
         aria-describedby={error ? errorId : helperText ? helperId : undefined}
         aria-invalid={error ? true : undefined}
         className={cn(
-          "min-h-32 w-full resize-y rounded-lg border border-[#cfe2ec] bg-[#fbfdff] px-4 py-3 text-sm font-medium leading-6 text-dark-blue shadow-[0_8px_22px_rgba(0,59,111,0.04)] outline-none transition placeholder:font-normal placeholder:text-[#8295a4] hover:border-[#b9dce9] focus:border-primary-blue focus:bg-white focus:ring-4 focus:ring-[#008fd3]/10 disabled:cursor-not-allowed disabled:bg-gray-light disabled:text-gray-text",
+          "min-h-32 w-full resize-y rounded-lg border border-[#cfe2ec] bg-white/88 px-4 py-3 text-sm font-medium leading-6 text-dark-blue shadow-[0_10px_26px_rgba(0,59,111,0.05)] outline-none transition placeholder:font-normal placeholder:text-[#7890a0] hover:border-[#a9d5e6] focus:border-primary-blue focus:bg-white focus:ring-4 focus:ring-[#008fd3]/12 disabled:cursor-not-allowed disabled:bg-gray-light disabled:text-gray-text",
           error && "border-[#fca5a5] focus:border-[#dc2626] focus:ring-[#dc2626]/10",
           className,
         )}

@@ -1,4 +1,5 @@
-import { CalendarCheck, HeartPulse, Menu } from "lucide-react";
+import { CalendarCheck, Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { ButtonLink } from "@/components/ui/button";
@@ -14,20 +15,25 @@ const navItems = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-[#d9ebf2] bg-white/92 shadow-[0_10px_30px_rgba(0,59,111,0.06)] backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/70 bg-white/82 shadow-[0_14px_40px_rgba(0,59,111,0.08)] backdrop-blur-xl">
       <Container className="flex min-h-20 items-center justify-between gap-4">
         <Link
-          className="flex items-center gap-3 text-dark-blue focus-visible:rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-blue"
+          className="group flex items-center gap-3 text-dark-blue focus-visible:rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-blue"
           href="/"
         >
-          <span className="flex size-11 items-center justify-center rounded-lg border border-[#b9e4f4] bg-light-blue text-primary-blue shadow-[0_10px_24px_rgba(0,143,211,0.12)]">
-            <HeartPulse aria-hidden="true" className="size-6" />
+          <span className="flex size-12 items-center justify-center rounded-xl border border-[#c8edf7] bg-white shadow-[0_12px_30px_rgba(0,143,211,0.13),0_0_0_4px_rgba(229,247,252,0.75)] transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_16px_34px_rgba(0,143,211,0.18),0_0_0_5px_rgba(0,158,90,0.08)]">
+            <Image
+              alt=""
+              aria-hidden="true"
+              className="h-9 w-auto object-contain drop-shadow-[0_3px_6px_rgba(0,143,211,0.25)]"
+              height={82}
+              priority
+              src="/images/nova-previne-logo-header.png"
+              width={38}
+            />
           </span>
-          <span className="leading-tight">
-            <span className="block text-base font-bold">Nova Previne</span>
-            <span className="block text-xs font-semibold text-gray-text">
-              Clínica Odontológica
-            </span>
+          <span className="block text-lg font-extrabold leading-none tracking-[0.01em] text-dark-blue transition group-hover:text-primary-blue">
+            Nova Previne
           </span>
         </Link>
 
@@ -37,7 +43,7 @@ export function Header() {
         >
           {navItems.map((item) => (
             <Link
-              className="rounded-lg px-2 py-2 text-sm font-semibold text-gray-text transition hover:bg-light-blue hover:text-primary-blue focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#008fd3]/15"
+              className="rounded-lg px-3 py-2 text-sm font-semibold text-gray-text transition hover:bg-light-blue hover:text-primary-blue focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#008fd3]/15"
               href={item.href}
               key={item.href}
             >
@@ -47,9 +53,6 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <span className="rounded-full border border-[#b7ead3] bg-light-green px-3 py-1 text-xs font-bold text-[#006b3d]">
-            20 anos
-          </span>
           <ButtonLink href="/login" size="sm" variant="secondary">
             Entrar
           </ButtonLink>
@@ -67,10 +70,7 @@ export function Header() {
             <Menu aria-hidden="true" className="size-5" />
             <span className="sr-only">Abrir navegação</span>
           </summary>
-          <div className="absolute right-0 top-14 w-[min(88vw,340px)] rounded-lg border border-[#d9ebf2] bg-white p-3 shadow-[0_22px_60px_rgba(0,59,111,0.18)]">
-            <div className="mb-3 rounded-lg border border-[#b7ead3] bg-light-green px-3 py-2 text-xs font-bold text-[#006b3d]">
-              Nova Previne · 20 anos de cuidado
-            </div>
+          <div className="absolute right-0 top-14 w-[min(88vw,340px)] rounded-lg border border-[#d9ebf2] bg-white/96 p-3 shadow-[0_22px_60px_rgba(0,59,111,0.18)] backdrop-blur-xl">
             <nav aria-label="Navegação mobile" className="grid gap-1">
               {navItems.map((item) => (
                 <Link

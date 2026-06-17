@@ -49,7 +49,7 @@ const steps = [
 export default function RegisterPage() {
   return (
     <main>
-      <section className="border-b border-[#d9ebf2] bg-[linear-gradient(180deg,#ffffff_0%,#f7fbfd_100%)]">
+      <section className="public-hero border-b border-[#d9ebf2]">
         <Container className="grid gap-12 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:py-20">
           <div>
             <Badge variant="green">Cadastro Nova Previne</Badge>

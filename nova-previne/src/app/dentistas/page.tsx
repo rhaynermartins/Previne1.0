@@ -167,7 +167,7 @@ export default async function DentistsPage() {
 
   return (
     <main>
-      <section className="border-b border-[#d9ebf2] bg-[linear-gradient(180deg,#ffffff_0%,#f7fbfd_100%)]">
+      <section className="public-hero border-b border-[#d9ebf2]">
         <Container className="py-14 lg:py-20">
           <div className="max-w-4xl">
             <Badge variant="green">Dentistas Nova Previne</Badge>

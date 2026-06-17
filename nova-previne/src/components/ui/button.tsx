@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils";
 
 const variants = {
   primary:
-    "border border-primary-blue bg-primary-blue text-white shadow-[0_12px_28px_rgba(0,143,211,0.24)] hover:border-[#007bb6] hover:bg-[#007bb6] hover:shadow-[0_16px_34px_rgba(0,143,211,0.28)] focus-visible:ring-[#008fd3]/20",
+    "border border-primary-blue bg-[image:var(--gradient-brand)] text-white shadow-[0_14px_34px_rgba(0,143,211,0.28)] hover:border-[#007bb6] hover:shadow-[0_18px_44px_rgba(0,143,211,0.34)] focus-visible:ring-[#008fd3]/20",
   secondary:
-    "border border-[#b9e4f4] bg-white text-dark-blue shadow-[0_8px_22px_rgba(0,59,111,0.05)] hover:border-primary-blue hover:bg-light-blue hover:text-primary-blue focus-visible:ring-[#008fd3]/15",
+    "border border-[#b9e4f4] bg-white/92 text-dark-blue shadow-[0_10px_26px_rgba(0,59,111,0.07)] hover:border-primary-blue hover:bg-light-blue hover:text-primary-blue hover:shadow-[0_14px_34px_rgba(0,59,111,0.1)] focus-visible:ring-[#008fd3]/15",
   success:
-    "border border-primary-green bg-primary-green text-white shadow-[0_12px_28px_rgba(0,158,90,0.22)] hover:border-[#00834b] hover:bg-[#00834b] hover:shadow-[0_16px_34px_rgba(0,158,90,0.26)] focus-visible:ring-[#009e5a]/20",
+    "border border-primary-green bg-[linear-gradient(135deg,#009e5a_0%,#00a878_52%,#00a6b4_100%)] text-white shadow-[0_14px_34px_rgba(0,158,90,0.26)] hover:border-[#00834b] hover:shadow-[0_18px_44px_rgba(0,158,90,0.3)] focus-visible:ring-[#009e5a]/20",
   neutral:
-    "border border-[#dbe8ef] bg-[#f6fafc] text-dark-blue hover:border-[#c7d7e5] hover:bg-white hover:text-primary-blue focus-visible:ring-[#003b6f]/10",
+    "border border-[#dbe8ef] bg-[#f6fafc]/92 text-dark-blue shadow-[0_8px_20px_rgba(0,59,111,0.04)] hover:border-[#b9dce9] hover:bg-white hover:text-primary-blue focus-visible:ring-[#003b6f]/10",
   danger:
     "border border-[#b42318] bg-[#b42318] text-white shadow-[0_12px_28px_rgba(180,35,24,0.18)] hover:border-[#912018] hover:bg-[#912018] focus-visible:ring-[#b42318]/20",
 };
@@ -36,7 +36,7 @@ type SharedButtonProps = {
 };
 
 const baseButtonClasses =
-  "inline-flex min-w-0 select-none items-center justify-center gap-2 rounded-lg font-semibold leading-5 transition duration-200 focus-visible:outline-none focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-60 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0";
+  "inline-flex min-w-0 select-none items-center justify-center gap-2 rounded-lg font-semibold leading-5 transition duration-200 focus-visible:outline-none focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-60 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 cursor-pointer";
 
 function ButtonContent({
   children,

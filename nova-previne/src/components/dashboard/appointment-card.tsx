@@ -37,11 +37,12 @@ function formatDate(date: Date) {
 
 export function AppointmentCard({ appointment }: AppointmentCardProps) {
   return (
-    <Card padding="lg">
+    <Card className="overflow-hidden" padding="lg">
+      <div className="-mx-5 -mt-5 mb-5 h-1.5 bg-[image:var(--gradient-brand)] sm:-mx-6 lg:-mx-7" />
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
         <div className="min-w-0">
           <div className="flex items-start gap-3">
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-light-blue text-primary-blue">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-light-blue text-primary-blue shadow-[0_10px_24px_rgba(0,143,211,0.1)]">
               <Stethoscope aria-hidden="true" className="size-5" />
             </span>
             <div className="min-w-0">
@@ -59,7 +60,7 @@ export function AppointmentCard({ appointment }: AppointmentCardProps) {
       </div>
 
       <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-lg border border-[#d9ebf2] bg-surface p-4">
+        <div className="rounded-lg border border-[#d9ebf2] bg-surface p-4 shadow-[0_8px_20px_rgba(0,59,111,0.04)]">
           <div className="flex items-start gap-3">
             <CalendarDays
               aria-hidden="true"
@@ -74,7 +75,7 @@ export function AppointmentCard({ appointment }: AppointmentCardProps) {
           </div>
         </div>
 
-        <div className="rounded-lg border border-[#d9ebf2] bg-surface p-4">
+        <div className="rounded-lg border border-[#d9ebf2] bg-surface p-4 shadow-[0_8px_20px_rgba(0,59,111,0.04)]">
           <div className="flex items-start gap-3">
             <Clock
               aria-hidden="true"
@@ -89,7 +90,7 @@ export function AppointmentCard({ appointment }: AppointmentCardProps) {
           </div>
         </div>
 
-        <div className="rounded-lg border border-[#d9ebf2] bg-surface p-4 md:col-span-2">
+        <div className="rounded-lg border border-[#d9ebf2] bg-surface p-4 shadow-[0_8px_20px_rgba(0,59,111,0.04)] md:col-span-2">
           <div className="flex items-start gap-3">
             <UserRound
               aria-hidden="true"

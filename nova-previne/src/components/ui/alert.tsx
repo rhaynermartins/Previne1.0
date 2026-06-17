@@ -27,7 +27,7 @@ export function Alert({
   return (
     <div
       className={cn(
-        "rounded-lg border p-4 text-sm shadow-[0_10px_24px_rgba(0,59,111,0.06)]",
+        "rounded-lg border p-4 text-sm shadow-[0_12px_30px_rgba(0,59,111,0.08)] ring-1 ring-white/70",
         variants[variant],
         className,
       )}

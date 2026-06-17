@@ -156,13 +156,14 @@ export function DashboardSidebar({
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-20 z-30 min-w-0 overflow-hidden rounded-lg border border-[#d9ebf2] bg-white/95 p-2 shadow-[var(--shadow-card)] ring-1 ring-white/70 backdrop-blur sm:p-3 lg:top-28">
+    <aside className="sticky top-20 z-30 min-w-0 overflow-hidden rounded-lg border border-[#d9ebf2]/90 bg-white/90 p-2 shadow-[var(--shadow-card)] ring-1 ring-white/80 backdrop-blur-xl sm:p-3 lg:top-28">
       <div className="hidden border-b border-[#edf4f8] px-3 pb-4 lg:block">
+        <div className="mb-4 h-1.5 rounded-full bg-[image:var(--gradient-brand)]" />
         <p className="text-sm font-bold text-dark-blue">{areaLabel}</p>
         <p className="mt-1 text-xs font-medium text-gray-text">
           Nova Previne
         </p>
-        <p className="mt-3 rounded-lg border border-[#b7ead3] bg-light-green px-3 py-2 text-xs font-bold text-[#006b3d]">
+        <p className="mt-3 rounded-lg border border-[#b7ead3] bg-light-green px-3 py-2 text-xs font-bold text-[#006b3d] shadow-[0_8px_20px_rgba(0,158,90,0.08)]">
           Painel seguro
         </p>
       </div>
@@ -181,8 +182,8 @@ export function DashboardSidebar({
               className={cn(
                 "flex min-h-11 shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-lg border px-3 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#008fd3]/15",
                 active
-                  ? "border-[#b9e4f4] bg-light-blue text-primary-blue shadow-[0_8px_22px_rgba(0,143,211,0.08)]"
-                  : "border-transparent text-gray-text hover:border-[#d9ebf2] hover:bg-surface hover:text-dark-blue",
+                  ? "border-[#b9e4f4] bg-light-blue text-primary-blue shadow-[0_10px_26px_rgba(0,143,211,0.1)]"
+                  : "border-transparent text-gray-text hover:border-[#d9ebf2] hover:bg-white hover:text-dark-blue",
               )}
               href={item.href}
               key={item.href}

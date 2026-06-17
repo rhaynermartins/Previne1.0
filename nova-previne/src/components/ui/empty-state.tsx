@@ -28,7 +28,7 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "rounded-lg border border-dashed p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]",
+        "rounded-lg border border-dashed p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_14px_34px_rgba(0,59,111,0.05)]",
         tones[tone],
         className,
       )}

@@ -47,7 +47,7 @@ const benefits = [
 export default function DentistRegisterPage() {
   return (
     <main>
-      <section className="border-b border-[#d9ebf2] bg-[linear-gradient(180deg,#ffffff_0%,#f7fbfd_100%)]">
+      <section className="public-hero border-b border-[#d9ebf2]">
         <Container className="grid gap-12 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:py-20">
           <div className="lg:sticky lg:top-28">
             <Badge variant="blue">Cadastro de dentista</Badge>

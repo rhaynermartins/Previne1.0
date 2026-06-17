@@ -153,9 +153,9 @@ function Stepper({ currentStep }: { currentStep: number }) {
 
   return (
     <div className="grid gap-4">
-      <div className="h-2 overflow-hidden rounded-full bg-[#edf7fb]">
+      <div className="h-3 overflow-hidden rounded-full border border-[#d9ebf2] bg-white shadow-[inset_0_1px_4px_rgba(0,59,111,0.08)]">
         <div
-          className="h-full rounded-full bg-[linear-gradient(90deg,#008fd3,#009e5a)] transition-all duration-300"
+          className="h-full rounded-full bg-[linear-gradient(90deg,#008fd3,#00a6b4,#009e5a)] shadow-[0_8px_20px_rgba(0,143,211,0.22)] transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -171,10 +171,10 @@ function Stepper({ currentStep }: { currentStep: number }) {
               aria-current={active ? "step" : undefined}
               className={
                 active
-                  ? "rounded-lg border border-[#b9e4f4] bg-light-blue p-3 text-primary-blue shadow-[0_10px_24px_rgba(0,143,211,0.1)]"
+                  ? "rounded-lg border border-[#b9e4f4] bg-light-blue p-3 text-primary-blue shadow-[0_12px_30px_rgba(0,143,211,0.12)]"
                   : completed
-                    ? "rounded-lg border border-[#b7ead3] bg-light-green p-3 text-primary-green"
-                    : "rounded-lg border border-[#e5edf3] bg-white p-3 text-gray-text"
+                    ? "rounded-lg border border-[#b7ead3] bg-light-green p-3 text-primary-green shadow-[0_8px_22px_rgba(0,158,90,0.08)]"
+                    : "rounded-lg border border-[#e5edf3] bg-white/86 p-3 text-gray-text"
               }
               key={step}
             >
@@ -208,7 +208,8 @@ function SelectionSummary({
   slot?: AvailableAppointmentSlot;
 }) {
   return (
-    <Card padding="lg">
+    <Card className="overflow-hidden" padding="lg">
+      <div className="-mx-5 -mt-5 mb-5 h-1.5 bg-[image:var(--gradient-brand)] sm:-mx-6 lg:-mx-7" />
       <p className="text-sm font-bold text-primary-green">Resumo</p>
       <h3 className="mt-2 text-xl font-bold text-dark-blue">
         Solicitação em andamento
@@ -249,7 +250,7 @@ function SummaryRow({
   value: string;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-lg border border-[#d9ebf2] bg-surface p-4">
+    <div className="flex items-start gap-3 rounded-lg border border-[#d9ebf2] bg-white/86 p-4 shadow-[0_8px_20px_rgba(0,59,111,0.04)]">
       <span className="mt-0.5 shrink-0 text-primary-blue">{icon}</span>
       <div className="min-w-0">
         <p className="text-xs font-bold text-dark-blue">{label}</p>
@@ -373,7 +374,8 @@ export default async function PatientSchedulingPage({
 
   return (
     <section className="grid gap-5">
-      <Card padding="lg">
+      <Card className="overflow-hidden" padding="lg">
+        <div className="-mx-5 -mt-5 mb-5 h-1.5 bg-[image:var(--gradient-brand)] sm:-mx-6 lg:-mx-7" />
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-start">
           <div>
             <p className="text-sm font-bold text-primary-green">
@@ -389,7 +391,7 @@ export default async function PatientSchedulingPage({
             </p>
           </div>
 
-          <span className="flex size-14 items-center justify-center rounded-lg bg-light-green text-primary-green">
+          <span className="flex size-14 items-center justify-center rounded-lg bg-light-green text-primary-green shadow-[0_14px_34px_rgba(0,158,90,0.14)]">
             <CalendarCheck aria-hidden="true" className="size-7" />
           </span>
         </div>
@@ -424,8 +426,8 @@ export default async function PatientSchedulingPage({
                   <ButtonLink
                     className={
                       selected
-                        ? "h-full min-h-28 items-start justify-start whitespace-normal border-primary-green bg-light-green text-left text-primary-green"
-                        : "h-full min-h-28 items-start justify-start whitespace-normal text-left"
+                        ? "h-full min-h-28 items-start justify-start whitespace-normal border-primary-green bg-light-green text-left text-primary-green shadow-[0_14px_34px_rgba(0,158,90,0.12)]"
+                        : "h-full min-h-28 items-start justify-start whitespace-normal bg-white/86 text-left hover:border-primary-blue hover:bg-light-blue/60"
                     }
                     href={buildSchedulingHref({
                       serviceId: service.id,
@@ -469,8 +471,8 @@ export default async function PatientSchedulingPage({
                   <ButtonLink
                     className={
                       selected
-                          ? "h-full min-h-28 items-start justify-start whitespace-normal border-primary-blue bg-light-blue text-left text-primary-blue"
-                          : "h-full min-h-28 items-start justify-start whitespace-normal text-left"
+                          ? "h-full min-h-28 items-start justify-start whitespace-normal border-primary-blue bg-light-blue text-left text-primary-blue shadow-[0_14px_34px_rgba(0,143,211,0.12)]"
+                          : "h-full min-h-28 items-start justify-start whitespace-normal bg-white/86 text-left hover:border-primary-blue hover:bg-light-blue/60"
                     }
                       href={buildSchedulingHref({
                         dentistId: dentist.id,
@@ -568,8 +570,8 @@ export default async function PatientSchedulingPage({
                       <ButtonLink
                         className={
                           selected
-                            ? "border-primary-green bg-light-green text-primary-green"
-                            : ""
+                            ? "border-primary-green bg-light-green text-primary-green shadow-[0_10px_24px_rgba(0,158,90,0.12)]"
+                            : "bg-white/86 hover:border-primary-blue hover:bg-light-blue/60"
                         }
                         href={buildSchedulingHref({
                           date: selectedDateValue,

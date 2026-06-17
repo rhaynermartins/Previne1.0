@@ -27,7 +27,8 @@ export function MetricCard({
   value,
 }: MetricCardProps) {
   return (
-    <Card className="min-h-full">
+    <Card className="min-h-full overflow-hidden">
+      <div className="-mx-5 -mt-5 mb-5 h-1.5 bg-[image:var(--gradient-brand)] sm:-mx-6" />
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <p className="text-sm font-bold text-gray-text">{label}</p>

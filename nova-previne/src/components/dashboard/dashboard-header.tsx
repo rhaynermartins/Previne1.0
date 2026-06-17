@@ -33,12 +33,12 @@ export function DashboardHeader({
     .join("");
 
   return (
-    <header className="overflow-hidden rounded-lg border border-[#d9ebf2] bg-white shadow-[var(--shadow-card)] ring-1 ring-white/70">
-      <div className="h-2 bg-[linear-gradient(90deg,#008fd3,#009e5a)]" />
+    <header className="overflow-hidden rounded-lg border border-[#d9ebf2]/90 bg-white/92 shadow-[var(--shadow-card)] ring-1 ring-white/80 backdrop-blur">
+      <div className="h-2 bg-[image:var(--gradient-brand)]" />
       <div className="p-5 sm:p-6">
       <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex min-w-0 items-start gap-4">
-          <span className="flex size-14 shrink-0 items-center justify-center rounded-lg border border-[#b9e4f4] bg-light-blue text-lg font-bold text-primary-blue">
+          <span className="flex size-14 shrink-0 items-center justify-center rounded-lg border border-[#b9e4f4] bg-[linear-gradient(135deg,#eaf7fc,#ffffff)] text-lg font-bold text-primary-blue shadow-[0_12px_30px_rgba(0,143,211,0.12)]">
             {initials || "NP"}
           </span>
           <div className="min-w-0">
