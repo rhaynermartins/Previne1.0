@@ -6,6 +6,7 @@ import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { DashboardSidebar } from "@/components/dashboard/dashboard-sidebar";
 import { Container } from "@/components/ui/container";
 import { getCurrentAuthSession } from "@/lib/auth/session";
+import { countUnreadNotifications } from "@/services/notificationService";
 
 export const metadata: Metadata = {
   title: "Dashboard do paciente | Nova Previne",
@@ -31,12 +32,17 @@ export default async function PatientDashboardLayout({
     redirect("/dashboard");
   }
 
+  const unreadNotificationsCount = await countUnreadNotifications(
+    session.user.id,
+  ).catch(() => 0);
+
   return (
     <main className="min-h-[calc(100vh-80px)] bg-surface">
       <Container className="grid gap-4 py-4 sm:gap-5 sm:py-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:py-8">
-        <DashboardSidebar />
+        <DashboardSidebar unreadNotificationsCount={unreadNotificationsCount} />
         <div className="grid min-w-0 gap-5">
           <DashboardHeader
+            unreadNotificationsCount={unreadNotificationsCount}
             user={{
               email: session.user.email,
               name: session.user.name,

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Bell,
   CalendarDays,
   CalendarRange,
   Clock,
@@ -44,6 +45,11 @@ const patientNavItems: DashboardNavItem[] = [
     label: "Histórico",
   },
   {
+    href: "/dashboard/paciente/notificacoes",
+    icon: Bell,
+    label: "Notificações",
+  },
+  {
     href: "/dashboard/paciente/agendamento",
     icon: PlusCircle,
     label: "Agendar",
@@ -81,6 +87,11 @@ const dentistNavItems: DashboardNavItem[] = [
     icon: History,
     label: "Histórico",
   },
+  {
+    href: "/dashboard/dentista/notificacoes",
+    icon: Bell,
+    label: "Notificações",
+  },
 ];
 
 type DashboardSidebarProps = {
@@ -88,6 +99,7 @@ type DashboardSidebarProps = {
   homeHref?: string;
   navLabel?: string;
   navItems?: DashboardNavItem[];
+  unreadNotificationsCount?: number;
 };
 
 function isActivePath(pathname: string, href: string, homeHref: string) {
@@ -103,6 +115,7 @@ export function DashboardSidebar({
   homeHref = "/dashboard/paciente",
   navLabel = "Navegação do dashboard do paciente",
   navItems = patientNavItems,
+  unreadNotificationsCount = 0,
 }: DashboardSidebarProps) {
   const pathname = usePathname();
 
@@ -137,6 +150,17 @@ export function DashboardSidebar({
             >
               <Icon aria-hidden="true" className="size-4" />
               <span>{item.label}</span>
+              {item.href.includes("/notificacoes") &&
+                unreadNotificationsCount > 0 && (
+                  <span
+                    aria-label={`${unreadNotificationsCount} notificacoes nao lidas`}
+                    className="ml-auto inline-flex min-w-6 items-center justify-center rounded-full bg-primary-green px-2 py-0.5 text-xs font-bold text-white"
+                  >
+                    {unreadNotificationsCount > 99
+                      ? "99+"
+                      : unreadNotificationsCount}
+                  </span>
+                )}
             </Link>
           );
         })}
