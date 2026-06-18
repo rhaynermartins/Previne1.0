@@ -1,6 +1,9 @@
+"use client";
+
 import { CalendarCheck, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -14,27 +17,58 @@ const navItems = [
 ];
 
 export function Header() {
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    function updateHeaderVisibility() {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY.current;
+
+      if (currentScrollY <= 12) {
+        setIsVisible(true);
+      } else if (Math.abs(delta) > 8) {
+        setIsVisible(delta < 0);
+      }
+
+      lastScrollY.current = currentScrollY;
+      ticking.current = false;
+    }
+
+    function handleScroll() {
+      if (!ticking.current) {
+        window.requestAnimationFrame(updateHeaderVisibility);
+        ticking.current = true;
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/70 bg-white/82 shadow-[0_14px_40px_rgba(0,59,111,0.08)] backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-50 border-b border-white/70 bg-white/82 shadow-[0_14px_40px_rgba(0,59,111,0.08)] backdrop-blur-xl transition-transform duration-300 ease-out ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <Container className="flex min-h-20 items-center justify-between gap-3">
         <Link
-          className="group flex shrink-0 items-center gap-2.5 text-dark-blue focus-visible:rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-blue sm:gap-3"
+          className="group flex shrink-0 items-center rounded-lg transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-blue"
           href="/"
         >
-          <span className="flex size-10 items-center justify-center rounded-lg border border-[#c8edf7] bg-white shadow-[0_10px_24px_rgba(0,143,211,0.12),0_0_0_3px_rgba(229,247,252,0.7)] transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_14px_30px_rgba(0,143,211,0.16),0_0_0_4px_rgba(0,158,90,0.08)] sm:size-11">
-            <Image
-              alt=""
-              aria-hidden="true"
-              className="h-7 w-auto object-contain drop-shadow-[0_2px_5px_rgba(0,143,211,0.24)] sm:h-8"
-              height={92}
-              priority
-              src="/images/nova-previne-logo-header.png"
-              width={40}
-            />
-          </span>
-          <span className="block whitespace-nowrap text-base font-extrabold leading-none tracking-[0.01em] text-dark-blue transition group-hover:text-primary-blue sm:text-lg">
-            Nova Previne
-          </span>
+          <Image
+            alt="Nova Previne"
+            className="h-12 w-auto object-contain drop-shadow-[0_3px_7px_rgba(0,59,111,0.22)] sm:h-14 lg:h-16"
+            height={239}
+            priority
+            src="/images/nova-previne-logo-header.png"
+            width={361}
+          />
         </Link>
 
         <nav
