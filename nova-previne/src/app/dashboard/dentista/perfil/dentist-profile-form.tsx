@@ -113,7 +113,7 @@ export function DentistProfileForm({
             label="Foto profissional"
             maxLength={260}
             name="photoUrl"
-            placeholder="/images/dentists/seu-nome.jpg"
+            placeholder="/images/dentists/joao-almeida.svg"
           />
         </div>
 
