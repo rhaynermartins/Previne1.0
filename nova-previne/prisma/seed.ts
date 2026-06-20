@@ -203,7 +203,7 @@ async function main() {
       cro: "CRO-MG 12345",
       specialty: "Ortodontia",
       bio: "Especialista em ortodontia, alinhadores e planejamento preventivo para adultos e adolescentes.",
-      photoUrl: "/images/dentists/joao-almeida.jpg",
+      photoUrl: "/images/dentists/joao-almeida.svg",
       availabilities: [
         {
           id: "availability-joao-monday",
@@ -235,7 +235,7 @@ async function main() {
       cro: "CRO-MG 23456",
       specialty: "Estetica Dental",
       bio: "Dentista focada em clareamento, estetica do sorriso e atendimento humanizado.",
-      photoUrl: "/images/dentists/marina-costa.jpg",
+      photoUrl: "/images/dentists/marina-costa.svg",
       availabilities: [
         {
           id: "availability-marina-tuesday",
@@ -267,7 +267,7 @@ async function main() {
       cro: "CRO-MG 34567",
       specialty: "Implantodontia",
       bio: "Atua com implantes, proteses e reabilitacao oral integrada.",
-      photoUrl: "/images/dentists/pedro-henrique.jpg",
+      photoUrl: "/images/dentists/pedro-henrique.svg",
       availabilities: [
         {
           id: "availability-pedro-monday",
