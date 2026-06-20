@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+  <title id="title">Dra. Marina Costa</title>
+  <desc id="desc">Avatar institucional da dentista Dra. Marina Costa.</desc>
+  <rect width="640" height="640" fill="#ecfff5"/>
+  <circle cx="320" cy="252" r="112" fill="#ffffff"/>
+  <path d="M164 548c24-112 98-172 156-172s132 60 156 172" fill="#ffffff"/>
+  <circle cx="320" cy="252" r="92" fill="#b7ead3"/>
+  <path d="M202 548c24-72 72-112 118-112s94 40 118 112" fill="#009e5a"/>
+  <text x="320" y="524" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700" text-anchor="middle">MC</text>
+</svg>
